@@ -1,0 +1,271 @@
+<svg viewBox="0 0 1300 820" xmlns="http://www.w3.org/2000/svg" width="1300" height="820" style="background:white;font-family:'Segoe UI',Helvetica,Arial,sans-serif;">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1L9 5L1 9" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1L9 5L1 9" fill="none" stroke="#d62b2b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1L9 5L1 9" fill="none" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1L9 5L1 9" fill="none" stroke="#E65100" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1L9 5L1 9" fill="none" stroke="#AB47BC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00000020"/>
+    </filter>
+  </defs>
+
+  <rect width="1300" height="820" fill="white"/>
+
+  <!-- TITLE -->
+  <text x="650" y="20" text-anchor="middle" font-size="15" font-weight="700" fill="#1a1a2e">AI Legal Assistant for SMB in Kazakhstan — System Architecture</text>
+  <text x="650" y="34" text-anchor="middle" font-size="10" fill="#3a78b0" font-style="italic">Agentic RAG Pipeline · LangGraph · Hybrid Search · Self-Reflection · RAGAS</text>
+
+  <!-- LAYER 1: Agent Pipeline -->
+  <rect x="30" y="38" width="1030" height="132" rx="10" fill="#EBF3FB" stroke="#90c2e7" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.85"/>
+  <text x="48" y="54" font-size="10" fill="#3a78b0" font-weight="600" font-style="italic">Agentic RAG — AI Agents (LangGraph StateGraph)</text>
+
+  <!-- LAYER 2: Retrieval Tools -->
+  <rect x="30" y="215" width="470" height="185" rx="10" fill="#E8F5E9" stroke="#66BB6A" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.85"/>
+  <text x="250" y="231" font-size="10" fill="#388E3C" font-weight="600" font-style="italic">Retrieval Tools</text>
+
+  <!-- MCP Zone -->
+  <rect x="700" y="215" width="300" height="130" rx="10" fill="#FFFDE7" stroke="#F9A825" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.9"/>
+  <text x="718" y="231" font-size="10" fill="#F57F17" font-weight="600" font-style="italic">MCP — External Source</text>
+
+  <!-- KNOWLEDGE BASE -->
+  <rect x="30" y="520" width="258" height="218" rx="10" fill="#F3E5F5" stroke="#AB47BC" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.9" filter="url(#shadow)"/>
+  <text x="48" y="536" font-size="10" fill="#7B1FA2" font-weight="600" font-style="italic">Local Knowledge Base (ChromaDB)</text>
+
+  <rect x="40" y="543" width="108" height="38" rx="7" fill="#CE93D8" stroke="#AB47BC" stroke-width="1" filter="url(#shadow)"/>
+  <text x="94" y="567" text-anchor="middle" font-size="9.5" fill="#4A148C" font-weight="700">Tax Code RK</text>
+
+  <rect x="162" y="543" width="116" height="38" rx="7" fill="#CE93D8" stroke="#AB47BC" stroke-width="1" filter="url(#shadow)"/>
+  <text x="220" y="567" text-anchor="middle" font-size="9.5" fill="#4A148C" font-weight="700">Labor Code RK</text>
+
+  <rect x="40" y="590" width="108" height="38" rx="7" fill="#CE93D8" stroke="#AB47BC" stroke-width="1" filter="url(#shadow)"/>
+  <text x="94" y="614" text-anchor="middle" font-size="9.5" fill="#4A148C" font-weight="700">Civil Code RK</text>
+
+  <rect x="162" y="590" width="116" height="38" rx="7" fill="#CE93D8" stroke="#AB47BC" stroke-width="1" filter="url(#shadow)"/>
+  <text x="220" y="614" text-anchor="middle" font-size="9.5" fill="#4A148C" font-weight="700">Business Code RK</text>
+
+  <rect x="75" y="637" width="138" height="68" rx="7" fill="#CE93D8" stroke="#AB47BC" stroke-width="1" filter="url(#shadow)"/>
+  <text x="144" y="657" text-anchor="middle" font-size="10" fill="#4A148C" font-weight="700">PDF Parser</text>
+  <text x="144" y="672" text-anchor="middle" font-size="8.5" fill="#6A1B9A">pypdf / docling</text>
+  <text x="144" y="686" text-anchor="middle" font-size="8.5" fill="#6A1B9A">chunk_size=500</text>
+
+  <!-- AGENT NODES -->
+
+  <!-- User -->
+  <rect x="36" y="65" width="88" height="62" rx="9" fill="#EEEEEE" stroke="#9E9E9E" stroke-width="1.3" filter="url(#shadow)"/>
+  <text x="80" y="93" text-anchor="middle" font-size="11" fill="#333" font-weight="700">User</text>
+  <text x="80" y="109" text-anchor="middle" font-size="9.5" fill="#555">Question</text>
+
+  <!-- 1. Query Rewrite -->
+  <rect x="140" y="60" width="140" height="76" rx="9" fill="#BBDEFB" stroke="#64B5F6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="210" y="80" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="700">1. Query Rewrite</text>
+  <line x1="140" y1="87" x2="280" y2="87" stroke="#64B5F6" stroke-width="0.8"/>
+  <text x="210" y="102" text-anchor="middle" font-size="9" fill="#1565C0">none | HyDE</text>
+  <text x="210" y="116" text-anchor="middle" font-size="9" fill="#1565C0">step_back | keyword</text>
+
+  <!-- 3. Doc Grader -->
+  <rect x="300" y="60" width="140" height="76" rx="9" fill="#BBDEFB" stroke="#64B5F6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="370" y="80" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="700">3. Doc Grader</text>
+  <line x1="300" y1="87" x2="440" y2="87" stroke="#64B5F6" stroke-width="0.8"/>
+  <text x="370" y="102" text-anchor="middle" font-size="9" fill="#1565C0">LLM: strict relevance</text>
+  <text x="370" y="116" text-anchor="middle" font-size="9" fill="#1565C0">scoring</text>
+
+  <!-- 4. LLM Generate -->
+  <rect x="600" y="60" width="140" height="76" rx="9" fill="#BBDEFB" stroke="#64B5F6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="670" y="80" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="700">4. LLM Generate</text>
+  <line x1="600" y1="87" x2="740" y2="87" stroke="#64B5F6" stroke-width="0.8"/>
+  <text x="670" y="102" text-anchor="middle" font-size="9" fill="#1565C0">gpt-4.1-mini</text>
+  <text x="670" y="116" text-anchor="middle" font-size="9" fill="#1565C0">RAG + MCP context</text>
+
+  <!-- 5. Hallucination Check -->
+  <rect x="760" y="60" width="140" height="76" rx="9" fill="#BBDEFB" stroke="#64B5F6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="830" y="78" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="700">5. Hallucination</text>
+  <text x="830" y="92" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="700">Check</text>
+  <line x1="760" y1="99" x2="900" y2="99" stroke="#64B5F6" stroke-width="0.8"/>
+  <text x="830" y="114" text-anchor="middle" font-size="9" fill="#1565C0">grounded: true / false</text>
+
+  <!-- 6. Reflect -->
+  <rect x="920" y="60" width="130" height="76" rx="9" fill="#BBDEFB" stroke="#64B5F6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="985" y="80" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="700">6. Reflect</text>
+  <line x1="920" y1="87" x2="1050" y2="87" stroke="#64B5F6" stroke-width="0.8"/>
+  <text x="985" y="102" text-anchor="middle" font-size="9" fill="#1565C0">RAGAS judge</text>
+  <text x="985" y="116" text-anchor="middle" font-size="9" fill="#1565C0">accept / retry</text>
+
+  <!-- ANSWER -->
+  <rect x="1068" y="67" width="82" height="62" rx="9" fill="#A5D6A7" stroke="#43A047" stroke-width="1.8" filter="url(#shadow)"/>
+  <text x="1109" y="92" text-anchor="middle" font-size="12" fill="#1B5E20" font-weight="800">ANSWER</text>
+  <text x="1109" y="108" text-anchor="middle" font-size="9" fill="#2E7D32">Streaming</text>
+
+  <!-- LANGFUSE -->
+  <rect x="1165" y="58" width="110" height="90" rx="9" fill="#FFCDD2" stroke="#EF9A9A" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="1220" y="78" text-anchor="middle" font-size="11" fill="#B71C1C" font-weight="700">LangFuse</text>
+  <line x1="1165" y1="85" x2="1275" y2="85" stroke="#EF9A9A" stroke-width="0.8"/>
+  <text x="1220" y="101" text-anchor="middle" font-size="9" fill="#C62828">Observability</text>
+  <text x="1220" y="115" text-anchor="middle" font-size="9" fill="#C62828">Trace</text>
+  <text x="1220" y="129" text-anchor="middle" font-size="9" fill="#C62828">Score</text>
+
+  <!-- RETRIEVAL NODES — Hybrid Search: VecDB and BM25 stacked vertically -->
+
+  <!-- 2a. Vector DB (top) -->
+  <rect x="42" y="225" width="132" height="62" rx="9" fill="#C8E6C9" stroke="#66BB6A" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="108" y="245" text-anchor="middle" font-size="10.5" fill="#1B5E20" font-weight="700">2a. Vector DB</text>
+  <line x1="42" y1="253" x2="174" y2="253" stroke="#66BB6A" stroke-width="0.8"/>
+  <text x="108" y="268" text-anchor="middle" font-size="9" fill="#2E7D32">ChromaDB</text>
+  <text x="108" y="281" text-anchor="middle" font-size="8" fill="#388E3C">text-embedding-3-small</text>
+
+  <!-- Hybrid Search badge (between the two boxes) -->
+  <rect x="44" y="295" width="128" height="18" rx="5" fill="#A5D6A7" stroke="#388E3C" stroke-width="1.4"/>
+  <text x="108" y="307" text-anchor="middle" font-size="8.5" fill="#1B5E20" font-weight="700">⊕ Hybrid Search</text>
+
+  <!-- 2b. BM25 Index (bottom) -->
+  <rect x="42" y="321" width="132" height="62" rx="9" fill="#C8E6C9" stroke="#66BB6A" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="108" y="341" text-anchor="middle" font-size="10.5" fill="#1B5E20" font-weight="700">2b. BM25 Index</text>
+  <line x1="42" y1="349" x2="174" y2="349" stroke="#66BB6A" stroke-width="0.8"/>
+  <text x="108" y="363" text-anchor="middle" font-size="9" fill="#2E7D32">BM25Okapi</text>
+  <text x="108" y="376" text-anchor="middle" font-size="8" fill="#388E3C">16,994 chunks</text>
+
+  <!-- 2c. RRF Fusion (right, centered between VecDB and BM25) -->
+  <rect x="222" y="262" width="132" height="76" rx="9" fill="#C8E6C9" stroke="#66BB6A" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="288" y="282" text-anchor="middle" font-size="10.5" fill="#1B5E20" font-weight="700">2c. RRF Fusion</text>
+  <line x1="222" y1="289" x2="354" y2="289" stroke="#66BB6A" stroke-width="0.8"/>
+  <text x="288" y="304" text-anchor="middle" font-size="9" fill="#2E7D32">Rank merging</text>
+  <text x="288" y="318" text-anchor="middle" font-size="8.5" fill="#388E3C">score combination</text>
+
+  <!-- MCP Legal Search -->
+  <rect x="710" y="235" width="280" height="92" rx="9" fill="#FFF9C4" stroke="#F9A825" stroke-width="1.8" filter="url(#shadow)"/>
+  <text x="850" y="257" text-anchor="middle" font-size="11" fill="#E65100" font-weight="700">MCP Legal Search</text>
+  <line x1="710" y1="264" x2="990" y2="264" stroke="#F9A825" stroke-width="0.8"/>
+  <text x="850" y="280" text-anchor="middle" font-size="9" fill="#BF360C">adilet.zan.kz · kgd.gov.kz · egov.kz</text>
+  <text x="850" y="296" text-anchor="middle" font-size="9" fill="#BF360C">DuckDuckGo site filter</text>
+  <text x="850" y="312" text-anchor="middle" font-size="8" fill="#E65100" font-style="italic">External legal database search via MCP protocol</text>
+
+  <!-- Cross-Encoder (standalone, conditional re-ranking step) -->
+  <rect x="510" y="235" width="148" height="76" rx="9" fill="#C8E6C9" stroke="#388E3C" stroke-width="2.2" filter="url(#shadow)"/>
+  <text x="584" y="257" text-anchor="middle" font-size="11" fill="#1B5E20" font-weight="700">Cross-Encoder</text>
+  <line x1="510" y1="264" x2="658" y2="264" stroke="#388E3C" stroke-width="0.8"/>
+  <text x="584" y="280" text-anchor="middle" font-size="9" fill="#2E7D32">LLM Re-ranking</text>
+  <text x="584" y="294" text-anchor="middle" font-size="8.5" fill="#388E3C">score 0–10</text>
+  <text x="584" y="322" text-anchor="middle" font-size="8" fill="#888" font-style="italic">conditional re-ranking step</text>
+
+  <!-- REFORMULATE -->
+  <rect x="500" y="440" width="156" height="60" rx="9" fill="#BBDEFB" stroke="#64B5F6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="578" y="465" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="700">7. Reformulate</text>
+  <line x1="500" y1="471" x2="656" y2="471" stroke="#64B5F6" stroke-width="0.8"/>
+  <text x="578" y="487" text-anchor="middle" font-size="9" fill="#1565C0">retry_retrieval</text>
+
+  <!-- ARROWS -->
+
+  <!-- KB index → Hybrid Search: solid below BM25, dashed ON TOP through BM25 -->
+  <line x1="108" y1="520" x2="108" y2="383" stroke="#AB47BC" stroke-width="1.5" fill="none"/>
+  <line x1="108" y1="383" x2="108" y2="313" stroke="#AB47BC" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arr-purple)" fill="none"/>
+  <rect x="112" y="430" width="36" height="14" rx="3" fill="#F3E5F5"/>
+  <text x="130" y="440" text-anchor="middle" font-size="8.5" fill="#7B1FA2" font-weight="600">index</text>
+
+  <!-- User → Query Rewrite -->
+  <line x1="124" y1="96" x2="138" y2="96" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Query Rewrite → Doc Grader: removed — QR goes via retrieval zone, not directly -->
+
+  <!-- LLM Generate → Hallucination -->
+  <line x1="740" y1="96" x2="758" y2="96" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Hallucination → Reflect -->
+  <line x1="900" y1="96" x2="918" y2="96" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Reflect → Answer -->
+  <line x1="1050" y1="96" x2="1066" y2="96" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Reflect → LangFuse (trace, dashed red — routes above ANSWER) -->
+  <path d="M1050 60 L1050 42 L1220 42 L1220 58" stroke="#d62b2b" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-red)" fill="none"/>
+  <text x="1135" y="38" text-anchor="middle" font-size="8" fill="#d62b2b">trace</text>
+
+  <!-- QR → vertical bus → VecDB and BM25 (Hybrid Search parallel fork) -->
+  <path d="M210 136 L210 192 L22 192" stroke="#555" stroke-width="1.2" fill="none"/>
+  <line x1="22" y1="192" x2="22" y2="395" stroke="#555" stroke-width="1.2" fill="none"/>
+  <circle cx="22" cy="192" r="3.5" fill="#555"/>
+  <!-- Branch to VecDB -->
+  <line x1="22" y1="256" x2="42" y2="256" stroke="#555" stroke-width="1.2" marker-end="url(#arr)"/>
+  <circle cx="22" cy="256" r="3.5" fill="#555"/>
+  <!-- Branch to BM25 -->
+  <line x1="22" y1="352" x2="42" y2="352" stroke="#555" stroke-width="1.2" marker-end="url(#arr)"/>
+  <circle cx="22" cy="352" r="3.5" fill="#555"/>
+
+  <!-- VecDB → merge → RRF (center y of RRF = 262+38 = 300) -->
+  <path d="M174 256 L200 256 L200 300 L222 300" stroke="#555" stroke-width="1.2" marker-end="url(#arr)" fill="none"/>
+  <!-- BM25 → merge point (joins at 200,300) -->
+  <path d="M174 352 L200 352 L200 300" stroke="#555" stroke-width="1.2" fill="none"/>
+  <circle cx="200" cy="300" r="3.5" fill="#555"/>
+
+  <!-- RRF Fusion → Doc Grader -->
+  <path d="M354 300 L382 300 L382 155 L370 155 L370 138" stroke="#555" stroke-width="1.3" marker-end="url(#arr)" fill="none"/>
+
+  <!-- Doc Grader → Cross-Encoder (≥2 docs, green) -->
+  <path d="M440 98 L584 98 L584 233" stroke="#2E7D32" stroke-width="1.4" marker-end="url(#arr-green)" fill="none"/>
+  <rect x="480" y="86" width="52" height="14" rx="3" fill="#E8F5E9"/>
+  <text x="506" y="96" text-anchor="middle" font-size="8.5" fill="#2E7D32" font-weight="600">≥2 docs</text>
+
+  <!-- Doc Grader → MCP (<2 docs, orange dashed) -->
+  <path d="M370 136 L370 190 L850 190 L850 233" stroke="#E65100" stroke-width="1.3" stroke-dasharray="5,3" marker-end="url(#arr-orange)" fill="none"/>
+  <rect x="560" y="182" width="84" height="14" rx="3" fill="#FFFDE7"/>
+  <text x="602" y="192" text-anchor="middle" font-size="8.5" fill="#E65100" font-weight="600">&lt;2 docs → MCP</text>
+
+  <!-- MCP → Cross-Encoder -->
+  <line x1="710" y1="281" x2="660" y2="281" stroke="#555" stroke-width="1.2" marker-end="url(#arr)"/>
+
+  <!-- Cross-Encoder → LLM Generate -->
+  <path d="M584 235 L584 148 L670 148 L670 138" stroke="#555" stroke-width="1.5" marker-end="url(#arr)" fill="none"/>
+
+
+  <!-- Reflect → Reformulate (retry_retrieval, red dashed — routes right of MCP zone) -->
+  <path d="M985 136 L985 200 L1010 200 L1010 470 L658 470" stroke="#d62b2b" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arr-red)" fill="none"/>
+  <rect x="786" y="462" width="96" height="14" rx="3" fill="#FFEBEE"/>
+  <text x="834" y="472" text-anchor="middle" font-size="8.5" fill="#d62b2b" font-weight="600">retry_retrieval</text>
+
+  <!-- Reformulate → Query Rewrite (exits left side at center y=470) -->
+  <path d="M500 470 L210 470 L210 138" stroke="#d62b2b" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arr-red)" fill="none"/>
+
+  <!-- Reflect → LLM Generate (retry_generation, red arc) -->
+  <path d="M985 62 C985 44 670 44 670 62" stroke="#d62b2b" stroke-width="1.4" marker-end="url(#arr-red)" fill="none" stroke-dasharray="5,3"/>
+  <rect x="790" y="35" width="100" height="14" rx="3" fill="#FFEBEE"/>
+  <text x="840" y="45" text-anchor="middle" font-size="8.5" fill="#d62b2b" font-weight="600">retry_generation</text>
+
+  <!-- LEGEND -->
+  <line x1="30" y1="758" x2="1270" y2="758" stroke="#ddd" stroke-width="1"/>
+
+  <rect x="32" y="768" width="14" height="12" rx="3" fill="#BBDEFB" stroke="#64B5F6" stroke-width="1"/>
+  <text x="52" y="779" font-size="9" fill="#333">AI Agent (LangGraph node)</text>
+
+  <rect x="210" y="768" width="14" height="12" rx="3" fill="#C8E6C9" stroke="#66BB6A" stroke-width="1"/>
+  <text x="230" y="779" font-size="9" fill="#333">Search Tool / Re-ranking</text>
+
+  <rect x="390" y="768" width="14" height="12" rx="3" fill="#FFF9C4" stroke="#F9A825" stroke-width="1"/>
+  <text x="410" y="779" font-size="9" fill="#333">MCP / External Source</text>
+
+  <rect x="560" y="768" width="14" height="12" rx="3" fill="#CE93D8" stroke="#AB47BC" stroke-width="1"/>
+  <text x="580" y="779" font-size="9" fill="#333">Local Knowledge Base</text>
+
+  <rect x="730" y="768" width="14" height="12" rx="3" fill="#FFCDD2" stroke="#EF9A9A" stroke-width="1"/>
+  <text x="750" y="779" font-size="9" fill="#333">Observability / Retry</text>
+
+  <rect x="890" y="768" width="14" height="12" rx="3" fill="#A5D6A7" stroke="#43A047" stroke-width="1"/>
+  <text x="910" y="779" font-size="9" fill="#333">Answer</text>
+
+  <line x1="968" y1="774" x2="1004" y2="774" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="1010" y="779" font-size="9" fill="#333">Main flow</text>
+
+  <line x1="1090" y1="774" x2="1126" y2="774" stroke="#d62b2b" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr-red)"/>
+  <text x="1132" y="779" font-size="9" fill="#333">Retry / Reformulate</text>
+
+  <!-- FOOTER -->
+  <text x="650" y="800" text-anchor="middle" font-size="8.5" fill="#888">Tech Stack: LangGraph · ChromaDB · OpenAI gpt-4.1-mini · text-embedding-3-small · BM25 · Cross-Encoder (LLM scoring) · RAGAS · MCP · LangFuse · Gradio · Python 3.11</text>
+</svg>
