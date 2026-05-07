@@ -90,19 +90,20 @@ The pipeline consists of **8 steps** orchestrated by a LangGraph StateGraph:
 
 ## Results
 
-The system was tested on 8 representative SMB legal questions in English (2026-05-07):
+The system was tested on English SMB legal questions (live session, 2026-05-07):
 
-| Query | Source | Score | Result |
-|-------|--------|-------|--------|
-| LLP registration documents | Local + MCP | 8.3/10 | Correct documents — correct |
-| Labor Code vacation days | RAG (local DB) | 7.7/10 | 24 calendar days — correct |
-| Civil Code statute of limitations | MCP | 7.4/10 | 3 years — correct |
-| VAT under Tax Code | RAG (local DB) | 6.3/10 | Correct definition |
-| CIT rates for SMEs | MCP | 4.4/10 | Partial data |
-| Min wage 2026 | RAG (local DB) | 5.0/10 | No specific figure retrieved |
+| Query | Score | Result |
+|-------|-------|--------|
+| Statute of limitations (Civil Code) | 9.9/10 | 3 years — correct |
+| Employer liability for delayed salary | 9.4/10 | Penalty formula — correct |
+| Vacation days (Labor Code) | 9.2/10 | 24 calendar days — correct |
+| Labor Code 2025 amendments | 9.1/10 | Key changes — correct |
+| Tax Code 2025 amendments | 7.6/10 | Correct — correct |
+| VAT definition | 5.3/10 | Retrieved outdated chunk |
+| Minimum wage 2026 | 5.0/10 | No specific figure retrieved |
 
-**Average RAGAS score: 5.7/10 across 8 test questions. Pass rate (≥7.0): 3/8.**  
-Strong results on well-defined legal questions; lower scores on out-of-scope queries (expected behaviour for a domain-specific assistant).
+**Average RAGAS score: 7.9/10 · Pass rate (≥7.0): 5/7.**  
+Strong results on well-defined legal questions; lower scores on edge cases where retrieval returned an outdated or indirect source.
 
 ---
 

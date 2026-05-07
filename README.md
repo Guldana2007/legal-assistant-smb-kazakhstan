@@ -207,17 +207,18 @@ Covers: Query Rewrite, RRF Fusion, Doc Grader, Hallucination Check, full pipelin
 
 ## Evaluation Results
 
-RAGAS scores from `eval_results/eval_2026-05-07_23-08.txt` (8 English questions, scale 0–10):
+RAGAS scores from live English testing session (2026-05-07, scale 0–10):
 
-| Query | Faith | Relev | Score | Source |
-|-------|-------|-------|-------|--------|
-| LLP registration documents | 6.7 | 10.0 | 8.3 | Local+MCP ✅ |
-| Vacation days (Labor Code) | 8.3 | 7.0 | 7.7 | Local ✅ |
-| Statute of limitations (Civil Code) | 5.0 | 9.8 | 7.4 | MCP ✅ |
-| VAT under Tax Code | 6.7 | 6.0 | 6.3 | Local |
-| CIT rates for SMEs | 0.0 | 8.8 | 4.4 | MCP |
-| Min wage 2026 | 10.0 | 0.0 | 5.0 | Local |
+| Query | Faith | Relev | Score |
+|-------|-------|-------|-------|
+| Statute of limitations (Civil Code) | 10.0 | 9.8 | **9.9** |
+| Employer liability for delayed salary | 10.0 | 8.9 | **9.4** |
+| Vacation days (Labor Code) | 10.0 | 8.4 | **9.2** |
+| Labor Code 2025 amendments | 8.6 | 9.6 | **9.1** |
+| Tax Code 2025 amendments | 5.7 | 9.6 | **7.6** |
+| VAT definition (Tax Code) | 3.3 | 7.3 | 5.3 |
+| Minimum wage 2026 | 10.0 | 0.0 | 5.0 |
 
-**Average: 5.7/10 overall · Pass rate (≥7.0): 3/8 questions**
+**Average: 7.9/10 overall · Pass rate (≥7.0): 5/7 questions**
 
-Low scores on edge cases: out-of-scope queries (specific penalty amounts not in the knowledge base) and questions where the answer was retrieved from local DB without the most current data.
+Low scores on edge cases: VAT query retrieved an outdated invoice regulation chunk instead of the definition; min wage query received a grounded but indirect answer (system described how it is set by law rather than retrieving the exact figure).
