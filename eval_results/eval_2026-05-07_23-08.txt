@@ -1,0 +1,108 @@
+LEGAL RAG ASSISTANT — EVALUATION REPORT
+Date: 2026-05-07 23:08
+Model: gpt-4.1-mini | Questions: 8
+==========================================================================================
+
+ #  Scenario      Score  Faith  Relev  Source    M  Att   Time  Question
+------------------------------------------------------------------------------------------
+ 1  Local RAG      7.4    5.0    9.8  mcp      ⚠️    1  16.1s  What is the statute of limitations under the 
+ 2  Local RAG      7.7    8.3    7.0  local     ✅    1   7.7s  How many days of annual vacation leave is an 
+ 3  Local RAG      6.3    6.7    6.0  local     ✅    1  14.5s  What is VAT under the Tax Code of Kazakhstan?
+ 4  MCP            4.4    0.0    8.8  mcp       ✅    1  16.3s  What are the corporate income tax (CIT) rates
+ 5  MCP            8.3    6.7   10.0  local    ⚠️    1  16.0s  What documents are required to register an LL
+ 6  MCP            5.1    2.9    7.4  local    ⚠️    1  10.1s  How do I register as a sole proprietor (IP) i
+ 7  Hard/Recent    5.0   10.0    0.0  local    ⚠️    1  17.9s  What is the minimum wage in Kazakhstan in 202
+ 8  Hard/Recent    1.7    3.3    0.0  mcp       ✅    1  12.0s  What are the penalties for late tax filing fo
+------------------------------------------------------------------------------------------
+AVG                 5.7    5.4    6.1
+
+Source match: 4/8 correct
+Total time:   110.6s
+Pass (>=7.0): 3/8 questions
+
+==========================================================================================
+ANSWERS DETAIL
+
+[1] What is the statute of limitations under the Civil Code of Kazakhstan?
+Score: 7.4/10 | Faith: 5.0 | Relev: 9.8 | Source: mcp ⚠️
+Срок исковой давности (statute of limitations) по Гражданскому кодексу Республики Казахстан представляет собой установленный законом период, в течение которого лицо может обратиться в суд за защитой своих гражданских прав. Согласно статье 172 Гражданского кодекса, срок может быть определён календарной датой, наступлением определённого события или конкретным временным промежутком. Общий срок исковой давности составляет три года, если иное не предусмотрено законом.
+
+---
+**Источники:**
+- ⚖️ [MCP adilet.zan.kz] [Civil Code of the Republic of Kazakhstan](https://adilet.zan.kz/eng/docs/K940001000_)
+- ⚖️ [MCP zakonpravo.kz] [Commentary to article 177. The concept of limitation period of the ...](https://zakonpravo.kz/en/commentary-to-article-177-the-concept-of-limitation-period-of-the-civil-code-of-the-republic-of-kazakhstan)
+
+------------------------------------------------------------
+
+[2] How many days of annual vacation leave is an employee entitled to in Kazakhstan?
+Score: 7.7/10 | Faith: 8.3 | Relev: 7.0 | Source: local ✅
+В Казахстане основной оплачиваемый ежегодный трудовой отпуск предоставляется продолжительностью 24 календарных дня, если иное не предусмотрено законодательством, трудовыми или коллективными договорами. Дополнительные оплачиваемые отпуска могут предоставляться в зависимости от условий труда и других факторов, установленных законом.
+
+---
+**Источники:**
+- 📄 [Локальная база] Трудовой кодекс РК, Статья 89, стр. 78
+
+------------------------------------------------------------
+
+[3] What is VAT under the Tax Code of Kazakhstan?
+Score: 6.3/10 | Faith: 6.7 | Relev: 6.0 | Source: local ✅
+Налог на добавленную стоимость (НДС) в Республике Казахстан регулируется главой 36 Налогового кодекса РК. При импорте товаров, включая продукты переработки, порядок исчисления и уплаты НДС определяется в соответствии с положениями этой главы. Если иное не установлено, применяется общий порядок, предусмотренный Налоговым кодексом.
+
+---
+**Источники:**
+- 📄 [Локальная база] Налоговый кодекс РК, стр. 651
+
+------------------------------------------------------------
+
+[4] What are the corporate income tax (CIT) rates for SMEs in Kazakhstan?
+Score: 4.4/10 | Faith: 0.0 | Relev: 8.8 | Source: mcp ✅
+В Казахстане ставка корпоративного подоходного налога (КПН) для субъектов малого и среднего бизнеса (МСБ) составляет 20%. Для некоторых секторов, таких как агропромышленный комплекс, действует сниженная ставка — 3%. Банки и игорный бизнес облагаются по ставке 25%, а социальный сектор — по ставкам 5% с 2026 года и 10% с 2027 года.
+
+---
+**Источники:**
+- ⚖️ [MCP portal.kgd.gov.kz] [Corporate income tax - State revenue committee Ministry of finance of ...](https://portal.kgd.gov.kz/en/pages/taxonomy/content_tax_124/806)
+- ⚖️ [MCP www.bcc.kz] [Taxes in Kazakhstan for Business in 2024: Regimes, Rates, and Important ...](https://www.bcc.kz/en/bcc-journal/taxes-in-kazakhstan/)
+
+------------------------------------------------------------
+
+[5] What documents are required to register an LLP in Kazakhstan?
+Score: 8.3/10 | Faith: 6.7 | Relev: 10.0 | Source: local ⚠️
+Для регистрации ТОО (LLP) в Казахстане необходимо подать заявление установленной формы, квитанцию об оплате государственной пошлины, а также документы, удостоверяющие личность учредителей. Для иностранных учредителей требуется копия паспорта с нотариально заверенным переводом на казахский или русский язык. Также могут потребоваться учредительные документы и сведения о месте нахождения юридического лица.
+
+---
+**Источники:**
+- 📄 [Локальная база] Налоговый кодекс РК, стр. 999
+- ⚖️ [MCP egov.kz] [How a foreigner can establish an individual entrepreneurship/LLP?](https://egov.kz/cms/en/articles/for_foreigners/open_LLP_foreigner)
+- ⚖️ [MCP dos-immigration.kz] [LLP registration in Kazakhstan - dos-immigration.kz](https://dos-immigration.kz/en/services/full-guide-for-llp-registration-in-kazakhstan/)
+
+------------------------------------------------------------
+
+[6] How do I register as a sole proprietor (IP) in Kazakhstan?
+Score: 5.1/10 | Faith: 2.9 | Relev: 7.4 | Source: local ⚠️
+В Казахстане физическое лицо подлежит государственной регистрации в качестве индивидуального предпринимателя (ИП) в соответствии с Предпринимательским кодексом Республики Казахстан. Регистрация осуществляется через уполномоченные органы, обычно через Центры обслуживания населения или электронно через портал eGov. После регистрации физическое лицо получает статус ИП и встает на налоговый учет в налоговом органе.
+
+---
+**Источники:**
+- 📄 [Локальная база] Гражданский кодекс РК (общая часть), стр. 13
+- 📄 [Локальная база] Налоговый кодекс РК, стр. 1017
+
+------------------------------------------------------------
+
+[7] What is the minimum wage in Kazakhstan in 2026?
+Score: 5.0/10 | Faith: 10.0 | Relev: 0.0 | Source: local ⚠️
+Минимальный размер месячной заработной платы в Казахстане на 2026 год устанавливается законом о республиканском бюджете и не может быть ниже этого уровня. Конкретная сумма минимальной заработной платы определяется ежегодно в соответствующем законодательном акте. Для точного значения минимальной зарплаты в 2026 году необходимо обратиться к последнему закону о республиканском бюджете РК.
+
+---
+**Источники:**
+- 📄 [Локальная база] Трудовой кодекс РК, стр. 88
+- ⚖️ [MCP b2b.telecom.kz] [Self-employed in Kazakhstan in 2026: who they are, conditions, and...](https://b2b.telecom.kz/en/news/business/samozanyatyy-v-kazahstane-v-2026-godu-kto-eto-kakie-usloviya-i-kak-nachat-rabotat)
+- ⚖️ [MCP vlast.kz] [The Week in Kazakhstan: Not Very Well - Аналитический...](https://vlast.kz/english/67318-the-week-in-kazakhstan-not-very-well.html)
+
+------------------------------------------------------------
+
+[8] What are the penalties for late tax filing for SMEs in Kazakhstan?
+Score: 1.7/10 | Faith: 3.3 | Relev: 0.0 | Source: mcp ✅
+Информация о штрафах за несвоевременную подачу налоговой отчетности для субъектов малого и среднего бизнеса в Казахстане в доступных источниках не найдена. Рекомендуется обратиться к Налоговому кодексу РК или официальным ресурсам Комитета государственных доходов для получения актуальной информации.
+
+------------------------------------------------------------
+

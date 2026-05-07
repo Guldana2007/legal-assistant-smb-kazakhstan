@@ -23,58 +23,58 @@ warnings.filterwarnings("ignore")
 from dotenv import load_dotenv
 load_dotenv()
 
-from langgraph_rag import run_graph
+from langgraph_rag import run_graph, _run_ragas
 
-# ── Test questions by scenario ────────────────────────────────────────────────
-# Три сценария покрывают все пути в графе:
-#   Local RAG  → ответ из локальной базы законов РК (ChromaDB + BM25)
-#   MCP        → ответ из официальных сайтов через MCP (adilet, kgd, egov)
-#   Hard       → актуальные данные, которых нет в локальной базе
+# ── Test questions (English) ──────────────────────────────────────────────────
+# Three scenarios cover all pipeline paths:
+#   Local RAG  → answer from local law database (ChromaDB + BM25)
+#   MCP        → answer from official government portals (adilet, kgd, egov)
+#   Hard       → current data not present in the static knowledge base
 
 TEST_CASES = [
-    # Scenario 1: вопросы из локальной базы законов
+    # Scenario 1: questions answered from local knowledge base
     {
         "scenario": "Local RAG",
-        "question": "Какой срок исковой давности по Гражданскому кодексу РК?",
-        "expected_source": "local",  # ожидаем ответ из ChromaDB
-    },
-    {
-        "scenario": "Local RAG",
-        "question": "Сколько дней отпуска положено работнику в Казахстане?",
+        "question": "What is the statute of limitations under the Civil Code of Kazakhstan?",
         "expected_source": "local",
     },
     {
         "scenario": "Local RAG",
-        "question": "Что такое НДС по Налоговому кодексу РК?",
+        "question": "How many days of annual vacation leave is an employee entitled to in Kazakhstan?",
+        "expected_source": "local",
+    },
+    {
+        "scenario": "Local RAG",
+        "question": "What is VAT under the Tax Code of Kazakhstan?",
         "expected_source": "local",
     },
 
-    # Scenario 2: вопросы которых нет в локальной базе → MCP
+    # Scenario 2: questions that require MCP fallback to government portals
     {
         "scenario": "MCP",
-        "question": "Какие налоговые ставки КПН для МСБ в Казахстане?",
-        "expected_source": "mcp",   # ожидаем ответ из kgd.gov.kz или adilet
-    },
-    {
-        "scenario": "MCP",
-        "question": "Какие документы нужны для открытия ТОО в Казахстане?",
+        "question": "What are the corporate income tax (CIT) rates for SMEs in Kazakhstan?",
         "expected_source": "mcp",
     },
     {
         "scenario": "MCP",
-        "question": "Как зарегистрироваться в качестве ИП в Казахстане?",
+        "question": "What documents are required to register an LLP in Kazakhstan?",
+        "expected_source": "mcp",
+    },
+    {
+        "scenario": "MCP",
+        "question": "How do I register as a sole proprietor (IP) in Kazakhstan?",
         "expected_source": "mcp",
     },
 
-    # Scenario 3: актуальные данные 2025-2026 → MCP или веб
+    # Scenario 3: current 2025–2026 data → MCP or web
     {
         "scenario": "Hard/Recent",
-        "question": "Какой минимальный размер заработной платы в Казахстане в 2026 году?",
-        "expected_source": "mcp",   # МЗП меняется ежегодно — нужны свежие данные
+        "question": "What is the minimum wage in Kazakhstan in 2026?",
+        "expected_source": "mcp",
     },
     {
         "scenario": "Hard/Recent",
-        "question": "Какие изменения в Трудовой кодекс РК внесены в 2025 году?",
+        "question": "What are the penalties for late tax filing for SMEs in Kazakhstan?",
         "expected_source": "mcp",
     },
 ]
@@ -129,6 +129,15 @@ def run_eval():
             attempts = state.get("attempt", 0)
             answer   = state.get("answer", "")
             actual   = _detect_actual_source(state)
+
+            # Fast-path skips RAGAS (score=0.0) — run it explicitly here
+            if score == 0.0 and answer:
+                docs = state.get("reranked_docs") or state.get("graded_docs") or []
+                ctxs = [d.page_content for d in docs[:3]]
+                mcp  = state.get("mcp_context", "")
+                if mcp and "не найдено" not in mcp:
+                    ctxs.append(mcp[:1500])
+                scores, score = _run_ragas(q, answer, ctxs)
             # ✅ источник совпал с ожидаемым, ⚠️ — нет
             match    = "✅" if actual == tc["expected_source"] else "⚠️"
 

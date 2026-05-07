@@ -207,7 +207,9 @@ Covers: Query Rewrite, RRF Fusion, Doc Grader, Hallucination Check, full pipelin
 
 ## Evaluation Results
 
-RAGAS scores from `eval_results/eval_2026-05-02_00-48.txt` (8 questions, scale 0–10):
+Two eval runs with 8 questions each (scale 0–10, RAGAS Faithfulness + Answer Relevancy):
+
+### Russian queries — `eval_results/eval_2026-05-02_00-48.txt`
 
 | Query | Faith | Relev | Score | Source |
 |-------|-------|-------|-------|--------|
@@ -215,8 +217,21 @@ RAGAS scores from `eval_results/eval_2026-05-02_00-48.txt` (8 questions, scale 0
 | Civil Code statute of limitations | 10.0 | 5.7 | 7.8 | Local ✅ |
 | ИП registration | 6.7 | 8.2 | 7.4 | Local+MCP ✅ |
 | Labor Code vacation days | 6.7 | 8.4 | 7.5 | Local ✅ |
-| КПН tax rates for SMB | 6.0 | 6.7 | 6.3 | MCP ✅ |
+| КПН tax rates for SMB | 6.0 | 6.7 | 6.3 | MCP |
 
-**Average: 6.2/10 overall · Pass rate (≥7.0): 4/8 questions**
+**Average: 6.2/10 · Pass rate (≥7.0): 4/8**
 
-Low scores on edge cases: out-of-scope questions (future law changes) and complex tax queries where MCP returned partial data.
+### English queries — `eval_results/eval_2026-05-07_23-08.txt`
+
+| Query | Faith | Relev | Score | Source |
+|-------|-------|-------|-------|--------|
+| Vacation days (Labor Code) | 8.3 | 7.0 | 7.7 | Local ✅ |
+| LLP registration documents | 6.7 | 10.0 | 8.3 | Local+MCP ✅ |
+| Statute of limitations (Civil Code) | 5.0 | 9.8 | 7.4 | MCP ✅ |
+| VAT under Tax Code | 6.7 | 6.0 | 6.3 | Local |
+| CIT rates for SMEs | 0.0 | 8.8 | 4.4 | MCP |
+| Min wage 2026 | 10.0 | 0.0 | 5.0 | Local |
+
+**Average: 5.7/10 · Pass rate (≥7.0): 3/8**
+
+Low scores on edge cases: out-of-scope queries (future law changes, specific penalty amounts) and questions where EN→RU translation retrieved a less precise chunk than the direct Russian query.

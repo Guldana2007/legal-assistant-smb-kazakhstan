@@ -90,7 +90,9 @@ The pipeline consists of **8 steps** orchestrated by a LangGraph StateGraph:
 
 ## Results
 
-The system was tested on representative SMB legal questions:
+The system was evaluated with two sets of 8 questions each (Russian and English):
+
+**Russian queries** (2026-05-02):
 
 | Query | Source | Score | Result |
 |-------|--------|-------|--------|
@@ -99,8 +101,19 @@ The system was tested on representative SMB legal questions:
 | Civil Code statute of limitations | RAG (local DB) | 7.8/10 | 3 years — correct |
 | ИП registration | RAG + MCP | 7.4/10 | Correct procedure — correct |
 
-**Average RAGAS score: 6.2/10 across 8 test questions. Pass rate (≥7.0): 4/8.**  
-Strong results on well-defined legal questions; lower scores on out-of-scope queries (expected behaviour for a domain-specific assistant).
+**Average: 6.2/10 · Pass rate (≥7.0): 4/8**
+
+**English queries** (2026-05-07):
+
+| Query | Source | Score | Result |
+|-------|--------|-------|--------|
+| LLP registration documents | Local + MCP | 8.3/10 | Correct documents — correct |
+| Vacation days (Labor Code) | RAG (local DB) | 7.7/10 | 24 calendar days — correct |
+| Statute of limitations | MCP | 7.4/10 | 3 years — correct |
+
+**Average: 5.7/10 · Pass rate (≥7.0): 3/8**
+
+Strong results on well-defined legal questions in both languages; lower scores on out-of-scope queries (expected behaviour for a domain-specific assistant). English queries show slightly lower scores due to EN→RU translation for retrieval occasionally retrieving a less precise chunk.
 
 ---
 
