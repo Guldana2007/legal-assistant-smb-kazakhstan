@@ -13,6 +13,7 @@ env/
 
 # ChromaDB / vector store
 chroma_db/
+chroma_db_*/
 *.db
 
 # Uploaded documents (large PDFs)

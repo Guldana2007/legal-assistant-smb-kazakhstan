@@ -82,21 +82,21 @@
 
   <!-- 4. LLM Generate -->
   <rect x="600" y="60" width="140" height="76" rx="9" fill="#BBDEFB" stroke="#64B5F6" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="670" y="80" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="700">4. LLM Generate</text>
+  <text x="670" y="80" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="700">5. LLM Generate</text>
   <line x1="600" y1="87" x2="740" y2="87" stroke="#64B5F6" stroke-width="0.8"/>
   <text x="670" y="102" text-anchor="middle" font-size="9" fill="#1565C0">gpt-4.1-mini</text>
   <text x="670" y="116" text-anchor="middle" font-size="9" fill="#1565C0">RAG + MCP context</text>
 
   <!-- 5. Hallucination Check -->
   <rect x="760" y="60" width="140" height="76" rx="9" fill="#BBDEFB" stroke="#64B5F6" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="830" y="78" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="700">5. Hallucination</text>
+  <text x="830" y="78" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="700">6. Hallucination</text>
   <text x="830" y="92" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="700">Check</text>
   <line x1="760" y1="99" x2="900" y2="99" stroke="#64B5F6" stroke-width="0.8"/>
   <text x="830" y="114" text-anchor="middle" font-size="9" fill="#1565C0">grounded: true / false</text>
 
   <!-- 6. Reflect -->
   <rect x="920" y="60" width="130" height="76" rx="9" fill="#BBDEFB" stroke="#64B5F6" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="985" y="80" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="700">6. Reflect</text>
+  <text x="985" y="80" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="700">7. Reflect</text>
   <line x1="920" y1="87" x2="1050" y2="87" stroke="#64B5F6" stroke-width="0.8"/>
   <text x="985" y="102" text-anchor="middle" font-size="9" fill="#1565C0">RAGAS judge</text>
   <text x="985" y="116" text-anchor="middle" font-size="9" fill="#1565C0">accept / retry</text>
@@ -151,15 +151,14 @@
 
   <!-- Cross-Encoder (standalone, conditional re-ranking step) -->
   <rect x="510" y="235" width="148" height="76" rx="9" fill="#C8E6C9" stroke="#388E3C" stroke-width="2.2" filter="url(#shadow)"/>
-  <text x="584" y="257" text-anchor="middle" font-size="11" fill="#1B5E20" font-weight="700">Cross-Encoder</text>
+  <text x="584" y="257" text-anchor="middle" font-size="11" fill="#1B5E20" font-weight="700">4. Cross-Encoder</text>
   <line x1="510" y1="264" x2="658" y2="264" stroke="#388E3C" stroke-width="0.8"/>
   <text x="584" y="280" text-anchor="middle" font-size="9" fill="#2E7D32">LLM Re-ranking</text>
   <text x="584" y="294" text-anchor="middle" font-size="8.5" fill="#388E3C">score 0–10</text>
-  <text x="584" y="322" text-anchor="middle" font-size="8" fill="#888" font-style="italic">conditional re-ranking step</text>
 
   <!-- REFORMULATE -->
   <rect x="500" y="440" width="156" height="60" rx="9" fill="#BBDEFB" stroke="#64B5F6" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="578" y="465" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="700">7. Reformulate</text>
+  <text x="578" y="465" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="700">8. Reformulate</text>
   <line x1="500" y1="471" x2="656" y2="471" stroke="#64B5F6" stroke-width="0.8"/>
   <text x="578" y="487" text-anchor="middle" font-size="9" fill="#1565C0">retry_retrieval</text>
 
@@ -202,12 +201,18 @@
 
   <!-- VecDB → merge → RRF (center y of RRF = 262+38 = 300) -->
   <path d="M174 256 L200 256 L200 300 L222 300" stroke="#555" stroke-width="1.2" marker-end="url(#arr)" fill="none"/>
+  <rect x="172" y="241" width="40" height="12" rx="3" fill="#E8F5E9"/>
+  <text x="192" y="250" text-anchor="middle" font-size="7.5" fill="#2E7D32" font-weight="600">15 docs</text>
   <!-- BM25 → merge point (joins at 200,300) -->
   <path d="M174 352 L200 352 L200 300" stroke="#555" stroke-width="1.2" fill="none"/>
+  <rect x="172" y="337" width="40" height="12" rx="3" fill="#E8F5E9"/>
+  <text x="192" y="346" text-anchor="middle" font-size="7.5" fill="#2E7D32" font-weight="600">15 docs</text>
   <circle cx="200" cy="300" r="3.5" fill="#555"/>
 
   <!-- RRF Fusion → Doc Grader -->
   <path d="M354 300 L382 300 L382 155 L370 155 L370 138" stroke="#555" stroke-width="1.3" marker-end="url(#arr)" fill="none"/>
+  <rect x="385" y="218" width="36" height="12" rx="3" fill="#E8F5E9"/>
+  <text x="403" y="227" text-anchor="middle" font-size="7.5" fill="#2E7D32" font-weight="600">8 docs</text>
 
   <!-- Doc Grader → Cross-Encoder (≥2 docs, green) -->
   <path d="M440 98 L584 98 L584 233" stroke="#2E7D32" stroke-width="1.4" marker-end="url(#arr-green)" fill="none"/>

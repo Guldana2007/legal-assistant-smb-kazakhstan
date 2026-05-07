@@ -95,9 +95,9 @@ region(ax, 3.5, 10.9, 21.0, 2.8, "Agentic RAG  —  AI Агенты  (LangGraph 
 box(ax,  1.5, Y1, 2.2, 1.0,  ["Пользователь", "(вопрос)"],                         C_USER,  B_USER)
 box(ax,  5.5, Y1, 2.8, 1.5,  ["1. Query Rewrite", "none | HyDE", "step_back | keyword"], C_AGENT, B_AGENT)
 box(ax,  9.5, Y1, 2.8, 1.5,  ["3. Doc Grader", "LLM: строгая оценка", "релевантности"], C_AGENT, B_AGENT)
-box(ax, 17.5, Y1, 2.8, 1.5,  ["4. LLM Generate", "gpt-4.1-mini", "RAG + MCP контекст"], C_AGENT, B_AGENT)
-box(ax, 21.5, Y1, 2.8, 1.5,  ["5. Hallucination", "Check", "Grounded: true / false"],    C_AGENT, B_AGENT)
-box(ax, 25.0, Y1, 2.6, 1.5,  ["6. Reflect", "RAGAS judge", "accept / retry"],            C_AGENT, B_AGENT)
+box(ax, 17.5, Y1, 2.8, 1.5,  ["5. LLM Generate", "gpt-4.1-mini", "RAG + MCP контекст"], C_AGENT, B_AGENT)
+box(ax, 21.5, Y1, 2.8, 1.5,  ["6. Hallucination", "Check", "Grounded: true / false"],    C_AGENT, B_AGENT)
+box(ax, 25.0, Y1, 2.6, 1.5,  ["7. Reflect", "RAGAS judge", "accept / retry"],            C_AGENT, B_AGENT)
 
 # Answer — right of Reflect
 box(ax, 27.4, Y1, 1.4, 1.2,  ["ОТВЕТ", "Streaming"],                                    C_ANS,   B_ANS)
@@ -114,7 +114,7 @@ box(ax,  8.2, Y2, 2.5, 1.2,  ["2b. BM25 Index", "BM25Okapi", "14 585 chunks"],  
 box(ax, 11.5, Y2, 2.2, 1.2,  ["2c. RRF Fusion", "Объединение", "рейтингов"],            C_TOOL, B_TOOL)
 
 # Cross-Encoder — between retrieval and Generate
-box(ax, 14.8, Y2, 2.8, 1.2,  ["Cross-Encoder", "Re-ranking", "ms-marco"],               C_TOOL, B_TOOL)
+box(ax, 14.8, Y2, 2.8, 1.2,  ["4. Cross-Encoder", "LLM Re-ranking", "score 0–10"],       C_TOOL, B_TOOL)
 
 # MCP subgraph
 region(ax, 18.5, 7.3, 8.0, 2.6, "MCP  —  Внешний источник", "#FFFBEA", B_MCP)
@@ -125,7 +125,7 @@ box(ax, 22.5, Y2, 6.5, 1.4,  ["MCP Legal Search",
 # ══════════════════════════════════════════════════════════════════════════════
 #  ROW 3  ─  RETRY LOOP  (y = 6.0)
 # ══════════════════════════════════════════════════════════════════════════════
-box(ax, 25.0, 6.0, 2.6, 1.0,  ["Reformulate", "(retry_retrieval)"],                      C_AGENT, B_AGENT)
+box(ax, 25.0, 6.0, 2.6, 1.0,  ["8. Reformulate", "retry_retrieval"],                      C_AGENT, B_AGENT)
 
 # ══════════════════════════════════════════════════════════════════════════════
 #  LANGFUSE  (right column)
@@ -227,11 +227,14 @@ for dy, color, txt in [(0.05, "#444", "Основной поток"),
 # ── Tech stack ─────────────────────────────────────────────────────────────────
 ax.text(14, 0.45,
         "Tech Stack:  LangGraph · ChromaDB · OpenAI gpt-4.1-mini · "
-        "text-embedding-3-small · BM25 · Cross-Encoder (ms-marco) · "
+        "text-embedding-3-small · BM25 · Cross-Encoder (LLM scoring) · "
         "RAGAS · MCP · LangFuse · Gradio · Python 3.11",
         ha="center", fontsize=8, color="#555", style="italic")
 
 plt.tight_layout(pad=0.3)
 plt.savefig("architecture_diagram.png", dpi=150, bbox_inches="tight",
             facecolor=fig.get_facecolor())
+plt.savefig("architecture_diagram.svg", bbox_inches="tight",
+            facecolor=fig.get_facecolor())
 print("Saved: architecture_diagram.png")
+print("Saved: architecture_diagram.svg")

@@ -1,70 +1,95 @@
 # Agentic RAG — Legal Assistant for SMB Kazakhstan
 
-A conversational legal assistant for small and medium businesses in Kazakhstan, built on an agentic RAG pipeline with LangGraph, ChromaDB, and Gradio.
+A conversational legal assistant for small and medium businesses in Kazakhstan, built on an agentic RAG pipeline with LangGraph, hybrid search, MCP integration, and automated quality evaluation.
+
+**Author:** Guldana Kassym-Ashim  
+**Program:** EPAM Generative AI for Software Development, 2026  
+**GitHub:** https://github.com/Guldana2007/legal-assistant-smb-kazakhstan
+
+---
 
 ## Overview
 
-The system answers legal questions about Kazakhstan legislation by combining local document search (RAG) with live web search via MCP (adilet.zan.kz). It supports Russian, Kazakh, and English.
+The system answers legal questions about Kazakhstan legislation by combining local document search (RAG) with live government web search via MCP (adilet.zan.kz, kgd.gov.kz, egov.kz). Supports Kazakh, English, and Russian. Every answer is grounded, hallucination-checked, and evaluated with RAGAS.
 
 **Pipeline:**
 ```
-Query Rewrite → Hybrid Search (Vector DB + BM25) → RRF Fusion → Doc Grader
-    → Cross-Encoder → Generate → Hallucination Check → Reflect
-    └─ fallback: Doc Grader → MCP (adilet.zan.kz) → Cross-Encoder
-    └─ retry:    Reflect → Reformulate → Query Rewrite (loop)
+1. Query Rewrite → 2a/2b. Hybrid Search (Vector DB + BM25)
+  → 2c. RRF Fusion → 3. Doc Grader
+  → 4. Cross-Encoder → 5. LLM Generate → 6. Hallucination Check → 7. Reflect
+  └─ fallback: Doc Grader (<2 docs) → MCP → 4. Cross-Encoder
+  └─ retry:    7. Reflect → 8. Reformulate → 1. Query Rewrite (up to 3 attempts)
 ```
 
 ## Architecture
 
 ![Architecture Diagram](architecture_diagram.png)
 
-**7 agents in the pipeline:**
-1. **Query Rewrite** — expands query (HyDE / Step-Back / Keyword / none)
-2. **Hybrid Search** — ChromaDB (semantic) + BM25 (lexical) run in parallel
-3. **RRF Fusion** — Reciprocal Rank Fusion (K=60) merges both result sets
-4. **Doc Grader** — filters irrelevant chunks (parallel, 6 threads)
-5. **Cross-Encoder** — LLM re-ranking, scores 0–10 (gpt-4.1-mini)
-6. **Hallucination Check** — verifies answer is grounded in context
-7. **Reflect / Reformulate** — RAGAS-based quality judge; retries if score < 7
+**8 pipeline steps, 7 LLM agents:**
 
-**MCP fallback:** when Doc Grader finds < 2 relevant chunks, the system queries adilet.zan.kz live via MCP server.
+| # | Agent | Role |
+|---|-------|------|
+| 1 | Query Rewrite | Translates EN/KZ→RU; expands query (HyDE / Step-Back / Keyword / none) |
+| 2a/2b | Hybrid Search | ChromaDB semantic (15 docs) + BM25 lexical (15 docs) in parallel |
+| 2c | RRF Fusion | Reciprocal Rank Fusion (K=60) → top 8 docs |
+| 3 | Doc Grader | Filters irrelevant chunks in parallel (LLM per doc) |
+| 4 | Cross-Encoder | LLM re-ranking, scores 0–10 (gpt-4.1-mini) — always runs |
+| 5 | LLM Generate | GPT-4.1-mini generates answer with source citations |
+| 6 | Hallucination Check | Verifies every fact is grounded in retrieved context |
+| 7 | Reflect | RAGAS judge (gpt-4o-mini); accepts or triggers retry |
+| 8 | Reformulate | Rewrites query with new strategy for retry_retrieval |
+
+**MCP fallback:** when Doc Grader finds < 2 relevant chunks, queries government portals live via custom MCP server. After MCP, always passes through Cross-Encoder.
+
+---
 
 ## Tech Stack
 
 | Component | Technology |
 |-----------|-----------|
-| Orchestration | LangGraph (StateGraph) |
-| Vector DB | ChromaDB (~17K chunks) |
+| Orchestration | LangGraph (StateGraph, TypedDict state) |
+| Vector DB | ChromaDB (~17K chunks, 4 legal codes) |
 | Embeddings | OpenAI text-embedding-3-small |
-| LLM | GPT-4.1-mini |
+| LLM (agents) | GPT-4.1-mini |
+| LLM (evaluation) | GPT-4o-mini (RAGAS judge) |
 | Lexical search | BM25Okapi (rank-bm25) |
-| Evaluation | RAGAS (Faithfulness + AnswerRelevancy) |
-| Observability | LangFuse |
-| UI | Gradio |
-| MCP server | Custom (adilet.zan.kz scraper) |
+| Evaluation | RAGAS (Faithfulness + AnswerRelevancy, ~$0.001/eval) |
+| Observability | LangFuse (full pipeline trace, token costs) |
+| UI | Gradio 6.x (streaming, multilingual) |
+| MCP server | Custom FastMCP (adilet.zan.kz, kgd.gov.kz, egov.kz) |
+
+**Cost:** ~$0.01 per query — up to 10,000× cheaper than a lawyer ($20–$100/hr).
+
+---
 
 ## Knowledge Base
 
-Local documents indexed in ChromaDB:
+Documents indexed in ChromaDB:
 - Трудовой кодекс РК (Labor Code)
 - Налоговый кодекс РК (Tax Code)
 - Гражданский кодекс РК (Civil Code)
 - Предпринимательский кодекс РК (Entrepreneurship Code)
-- TechStart_Reglament_2025.docx
-- DigiCor_Reglament_2025.docx
+- TechStart_Reglament_2025.docx (company regulation)
+- DigiCor_Reglament_2025.docx (company regulation)
+
+Users can upload additional PDF/DOCX files at runtime via the Upload tab.
+
+---
 
 ## Requirements
 
 - Python 3.11+
-- Docker (for LangFuse observability)
 - OpenAI API key
+- Docker (optional — for LangFuse observability)
+
+---
 
 ## Installation
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<your-username>/capstone-epam-rag.git
-cd capstone-epam-rag
+git clone https://github.com/Guldana2007/legal-assistant-smb-kazakhstan.git
+cd legal-assistant-smb-kazakhstan
 
 # 2. Create and activate virtual environment
 python -m venv .venv
@@ -81,6 +106,8 @@ cp .env.example .env
 # Edit .env and add your OpenAI API key
 ```
 
+---
+
 ## Environment Variables
 
 Create a `.env` file in the project root:
@@ -94,9 +121,11 @@ LANGFUSE_SECRET_KEY=sk-lf-...
 LANGFUSE_HOST=http://localhost:3000
 ```
 
+---
+
 ## Running
 
-### 1. Start LangFuse (optional, for observability)
+### 1. Start LangFuse (optional)
 ```bash
 docker-compose -f docker-compose.langfuse.yml up -d
 # Dashboard: http://localhost:3000
@@ -113,9 +142,11 @@ python app_agentic_rag.py
 # Open: http://localhost:7861
 ```
 
+---
+
 ## Usage
 
-1. Select language: Қазақша / English / Русский
+1. Select language: **Қазақша / English / Русский**
 2. Type a legal question or click a sample question
 3. Adjust **Max Attempts** (1–5) and **Query Expansion** strategy if needed
 4. Click **Submit** — the answer streams with live Agent Trace
@@ -123,32 +154,66 @@ python app_agentic_rag.py
 
 ### Upload custom documents
 
-Go to the **Upload** tab to add your own PDF or DOCX files. They will be chunked and indexed automatically.
+Go to the **Upload** tab to add your own PDF or DOCX files. They will be chunked and indexed automatically into ChromaDB.
+
+---
+
+## Tests
+
+```bash
+# Fast unit tests — no LLM calls (~3 seconds)
+python -m pytest tests/ -v -m unit
+
+# Full integration tests — real LLM calls (~3-5 minutes)
+python -m pytest tests/ -v -m integration
+
+# All 24 tests
+python -m pytest tests/ -v
+```
+
+**24 tests total:** 10 unit + 14 integration  
+Covers: Query Rewrite, RRF Fusion, Doc Grader, Hallucination Check, full pipeline (positive + negative scenarios), multilingual mode, adversarial inputs.
+
+---
 
 ## Project Structure
 
 ```
-├── app_agentic_rag.py          # Gradio UI + streaming handler
-├── langgraph_rag.py            # LangGraph StateGraph (pipeline controller)
-├── ingest.py                   # Document indexing script
+├── app_agentic_rag.py              # Gradio UI + streaming handler
+├── langgraph_rag.py                # LangGraph StateGraph (pipeline controller)
+├── ingest.py                       # Document indexing script
+├── eval_run.py                     # Batch RAGAS evaluation runner
+├── pytest.ini                      # Test markers (unit / integration)
 ├── agents/
-│   ├── query_rewrite.py        # Agent 1: Query expansion
-│   ├── vector_db.py            # Agent 2a: Semantic search (ChromaDB)
-│   ├── bm25_index.py           # Agent 2b: Lexical search (BM25)
-│   ├── rrf_fusion.py           # Agent 3: RRF Fusion
-│   ├── doc_grader.py           # Agent 4: Document grading (parallel)
-│   ├── cross_encoder.py        # Agent 5: LLM re-ranking
-│   ├── llm_generate.py         # Agent 6: Answer generation
-│   ├── hallucination_check.py  # Agent 6b: Grounding verification
-│   ├── mcp_legal_search.py     # MCP fallback: adilet.zan.kz
-│   └── shared.py               # LangFuse + utilities
+│   ├── query_rewrite.py            # Step 1: Query expansion + translation
+│   ├── vector_db.py                # Step 2a: Semantic search (ChromaDB, 15 docs)
+│   ├── bm25_index.py               # Step 2b: Lexical search (BM25, 15 docs)
+│   ├── rrf_fusion.py               # Step 2c: RRF Fusion → 8 docs
+│   ├── doc_grader.py               # Step 3: Document grading (parallel LLM)
+│   ├── cross_encoder.py            # Step 4: LLM re-ranking (score 0–10)
+│   ├── llm_generate.py             # Step 5: Answer generation + citations
+│   ├── hallucination_check.py      # Step 6: Grounding verification
+│   ├── mcp_legal_search.py         # MCP fallback: gov portals
+│   └── shared.py                   # LangFuse + utilities
 ├── mcp_server/
-│   └── legal_kz_server.py      # MCP server for Kazakhstan legal DB
-├── docs/                       # PDF/DOCX knowledge base files
-├── docker-compose.langfuse.yml # LangFuse + PostgreSQL
-└── architecture_diagram.png    # System architecture diagram
+│   └── legal_kz_server.py          # FastMCP server for Kazakhstan legal DB
+├── tests/
+│   └── test_pipeline.py            # 24 tests (10 unit + 14 integration)
+├── eval_results/                   # RAGAS evaluation output (JSON + TXT)
+├── docker-compose.langfuse.yml     # LangFuse + PostgreSQL
+├── architecture_diagram.png        # System architecture diagram
+└── architecture_diagram.svg        # Architecture diagram (vector)
 ```
 
-## Author
+---
 
-Dana Kassym — EPAM Generative AI for Software Development, 2025
+## Evaluation Results
+
+Sample RAGAS scores from `eval_results/`:
+
+| Query | Faithfulness | Answer Relevancy |
+|-------|-------------|-----------------|
+| Labor Code vacation days | 0.92 | 0.88 |
+| Tax Code VAT rate | 0.95 | 0.91 |
+| TechStart daily allowance | 0.89 | 0.85 |
+| Min wage 2026 (MCP) | 0.87 | 0.90 |
