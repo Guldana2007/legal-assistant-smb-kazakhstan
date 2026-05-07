@@ -221,4 +221,4 @@ RAGAS scores from live English testing session (2026-05-07, scale 0–10):
 
 **Average: 7.9/10 overall · Pass rate (≥7.0): 5/7 questions**
 
-Low scores on edge cases: VAT query retrieved an outdated invoice regulation chunk instead of the definition; min wage query received a grounded but indirect answer (system described how it is set by law rather than retrieving the exact figure).
+Low scores on two edge cases: the VAT question pulled an outdated 2014 invoice chunk instead of the definition, and the min wage question returned how the wage is set by law rather than the actual 2026 figure — a retrieval gap, not a generation error.
