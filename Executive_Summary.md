@@ -90,30 +90,19 @@ The pipeline consists of **8 steps** orchestrated by a LangGraph StateGraph:
 
 ## Results
 
-The system was evaluated with two sets of 8 questions each (Russian and English):
-
-**Russian queries** (2026-05-02):
-
-| Query | Source | Score | Result |
-|-------|--------|-------|--------|
-| МЗП 2026 (minimum wage) | MCP → adilet.zan.kz | 10.0/10 | 85,000 KZT — correct |
-| Labor Code vacation days | RAG (local DB) | 7.5/10 | 24 calendar days — correct |
-| Civil Code statute of limitations | RAG (local DB) | 7.8/10 | 3 years — correct |
-| ИП registration | RAG + MCP | 7.4/10 | Correct procedure — correct |
-
-**Average: 6.2/10 · Pass rate (≥7.0): 4/8**
-
-**English queries** (2026-05-07):
+The system was tested on 8 representative SMB legal questions in English (2026-05-07):
 
 | Query | Source | Score | Result |
 |-------|--------|-------|--------|
 | LLP registration documents | Local + MCP | 8.3/10 | Correct documents — correct |
-| Vacation days (Labor Code) | RAG (local DB) | 7.7/10 | 24 calendar days — correct |
-| Statute of limitations | MCP | 7.4/10 | 3 years — correct |
+| Labor Code vacation days | RAG (local DB) | 7.7/10 | 24 calendar days — correct |
+| Civil Code statute of limitations | MCP | 7.4/10 | 3 years — correct |
+| VAT under Tax Code | RAG (local DB) | 6.3/10 | Correct definition |
+| CIT rates for SMEs | MCP | 4.4/10 | Partial data |
+| Min wage 2026 | RAG (local DB) | 5.0/10 | No specific figure retrieved |
 
-**Average: 5.7/10 · Pass rate (≥7.0): 3/8**
-
-Strong results on well-defined legal questions in both languages; lower scores on out-of-scope queries (expected behaviour for a domain-specific assistant). English queries show slightly lower scores due to EN→RU translation for retrieval occasionally retrieving a less precise chunk.
+**Average RAGAS score: 5.7/10 across 8 test questions. Pass rate (≥7.0): 3/8.**  
+Strong results on well-defined legal questions; lower scores on out-of-scope queries (expected behaviour for a domain-specific assistant).
 
 ---
 
