@@ -95,7 +95,7 @@ The system was tested on representative SMB legal questions:
 | Query | Source | Result |
 |-------|--------|--------|
 | МЗП 2026 (minimum wage) | MCP → adilet.zan.kz | 85,000 KZT — correct |
-| TechStart daily allowance | RAG (local DB) | 5,000 KZT — correct |
+| Civil Code statute of limitations | RAG (local DB) | 3 years — correct |
 | Labor Code vacation days | RAG (local DB) | 24 calendar days — correct |
 | Tax Code VAT rate | RAG (local DB) | 12% — correct |
 

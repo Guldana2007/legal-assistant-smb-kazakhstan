@@ -69,10 +69,8 @@ Documents indexed in ChromaDB:
 - Налоговый кодекс РК (Tax Code)
 - Гражданский кодекс РК (Civil Code)
 - Предпринимательский кодекс РК (Entrepreneurship Code)
-- TechStart_Reglament_2025.docx (company regulation)
-- DigiCor_Reglament_2025.docx (company regulation)
 
-Users can upload additional PDF/DOCX files at runtime via the Upload tab.
+Users can upload additional PDF/DOCX files at runtime via the **Upload** tab — they are chunked and indexed into ChromaDB automatically.
 
 ---
 
@@ -215,5 +213,5 @@ Sample RAGAS scores from `eval_results/`:
 |-------|-------------|-----------------|
 | Labor Code vacation days | 0.92 | 0.88 |
 | Tax Code VAT rate | 0.95 | 0.91 |
-| TechStart daily allowance | 0.89 | 0.85 |
+| Civil Code statute of limitations | 0.89 | 0.85 |
 | Min wage 2026 (MCP) | 0.87 | 0.90 |
