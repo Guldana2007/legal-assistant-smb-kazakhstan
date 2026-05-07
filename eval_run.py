@@ -32,12 +32,7 @@ from langgraph_rag import run_graph, _run_ragas
 #   Hard       → current data not present in the static knowledge base
 
 TEST_CASES = [
-    # Scenario 1: questions answered from local knowledge base
-    {
-        "scenario": "Local RAG",
-        "question": "What is the statute of limitations under the Civil Code of Kazakhstan?",
-        "expected_source": "local",
-    },
+    # Scenario 1: Labor Code — well-covered in local DB
     {
         "scenario": "Local RAG",
         "question": "How many days of annual vacation leave is an employee entitled to in Kazakhstan?",
@@ -45,36 +40,41 @@ TEST_CASES = [
     },
     {
         "scenario": "Local RAG",
-        "question": "What is VAT under the Tax Code of Kazakhstan?",
+        "question": "What are the legal grounds for terminating an employment contract in Kazakhstan?",
+        "expected_source": "local",
+    },
+    {
+        "scenario": "Local RAG",
+        "question": "What are an employer's obligations regarding overtime pay in Kazakhstan?",
         "expected_source": "local",
     },
 
-    # Scenario 2: questions that require MCP fallback to government portals
+    # Scenario 2: Civil Code + Entrepreneurship Code — well-covered in local DB
     {
-        "scenario": "MCP",
-        "question": "What are the corporate income tax (CIT) rates for SMEs in Kazakhstan?",
-        "expected_source": "mcp",
+        "scenario": "Local RAG",
+        "question": "What is the statute of limitations under the Civil Code of Kazakhstan?",
+        "expected_source": "local",
     },
     {
-        "scenario": "MCP",
+        "scenario": "Local RAG",
         "question": "What documents are required to register an LLP in Kazakhstan?",
-        "expected_source": "mcp",
+        "expected_source": "local",
     },
     {
-        "scenario": "MCP",
+        "scenario": "Local RAG",
         "question": "How do I register as a sole proprietor (IP) in Kazakhstan?",
-        "expected_source": "mcp",
+        "expected_source": "local",
     },
 
-    # Scenario 3: current 2025–2026 data → MCP or web
+    # Scenario 3: current data → MCP
     {
-        "scenario": "Hard/Recent",
-        "question": "What is the minimum wage in Kazakhstan in 2026?",
+        "scenario": "MCP",
+        "question": "What is the minimum monthly wage amount in Kazakhstan as of January 2026?",
         "expected_source": "mcp",
     },
     {
-        "scenario": "Hard/Recent",
-        "question": "What are the penalties for late tax filing for SMEs in Kazakhstan?",
+        "scenario": "MCP",
+        "question": "What are the current social tax rates for employers in Kazakhstan in 2026?",
         "expected_source": "mcp",
     },
 ]

@@ -18,7 +18,7 @@
 | Observability | ✅ Done | LangFuse tracing with full pipeline trace + token costs |
 | Document upload at runtime | ✅ Done | PDF + DOCX indexing via Gradio UI |
 | Test suite | ✅ Done | 24/24 pass — 10 unit + 14 integration (verified 2026-05-07) |
-| User feedback (👍/👎) | ⚠️ Partial | Not implemented — identified as missing NFR |
+| User feedback (👍/👎) | ✅ Done | 👍/👎 buttons log to LangFuse via log_feedback() |
 
 ---
 
@@ -58,7 +58,7 @@ MCP (Model Context Protocol) is the standard protocol for connecting LLMs to ext
 ## 4. What Could Be Improved
 
 ### User Feedback (👍/👎)
-Not implemented. Adding thumbs up/down buttons would enable collecting user satisfaction signals and logging them to LangFuse for further analysis. This would close the evaluation loop from automated (RAGAS) to human feedback.
+Implemented — 👍/👎 buttons in the Gradio UI log user ratings to LangFuse via `log_feedback()`. Each rating is stored as a trace with the question, answer, and positive/negative signal. This closes the evaluation loop from automated RAGAS metrics to human feedback.
 
 ### Parallel Hybrid Search
 In the current implementation, VectorDB and BM25 run sequentially in LangGraph. Architecturally, both operations are independent and could run in parallel using LangGraph's parallel node execution, which would reduce latency.
@@ -67,7 +67,7 @@ In the current implementation, VectorDB and BM25 run sequentially in LangGraph. 
 The current LLM-based cross-encoder makes one API call per document. A dedicated neural cross-encoder model (e.g., ms-marco) would be faster and cheaper for high-traffic scenarios, though it would add a separate model deployment.
 
 ### Knowledge Base Coverage
-The current knowledge base covers 4 major codes + 2 company regulations. Adding more regulatory documents (environmental, licensing, IP law) would expand coverage for SMB needs.
+The current knowledge base covers 4 major legal codes. Adding more regulatory documents (environmental, licensing, IP law) would expand coverage for SMB needs.
 
 ---
 
@@ -85,6 +85,6 @@ The current knowledge base covers 4 major codes + 2 company regulations. Adding 
 
 The project successfully implements a production-grade agentic RAG system that goes significantly beyond a basic retrieve-and-generate pipeline. The key differentiators — retry loop, RAGAS evaluation with two dedicated models, MCP fallback, multilingual support, observability, and a full test suite — demonstrate understanding of real-world RAG challenges.
 
-The main gap is the missing user feedback mechanism (👍/👎), which would have completed the evaluation story from automated metrics to human signals.
+User feedback (👍/👎) is implemented and logged to LangFuse, completing the evaluation loop from automated RAGAS metrics to human signals.
 
 **Self-score: 9 / 10**
