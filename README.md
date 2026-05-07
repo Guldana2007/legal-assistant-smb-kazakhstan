@@ -228,6 +228,5 @@ Low scores on two edge cases: the VAT question pulled an outdated 2014 invoice c
 ## Future Improvements
 
 - **MCP query optimization** — send a short keyword query to DuckDuckGo instead of the full question, to improve retrieval of specific figures (e.g. minimum wage amount)
-- **Parallel hybrid search** — run VectorDB and BM25 in parallel using LangGraph's parallel nodes to reduce latency
 - **Expanded knowledge base** — add environmental, licensing, and IP law codes to cover more SMB scenarios
 - **Kazakh-language embeddings** — add a dedicated KZ-language embedding model alongside the current RU/EN pipeline

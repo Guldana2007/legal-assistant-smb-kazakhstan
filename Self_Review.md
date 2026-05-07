@@ -60,9 +60,6 @@ MCP (Model Context Protocol) is the standard protocol for connecting LLMs to ext
 ### User Feedback (👍/👎)
 Implemented — 👍/👎 buttons in the Gradio UI log user ratings to LangFuse via `log_feedback()`. Each rating is stored as a trace with the question, answer, and positive/negative signal. This closes the evaluation loop from automated RAGAS metrics to human feedback.
 
-### Parallel Hybrid Search
-In the current implementation, VectorDB and BM25 run sequentially in LangGraph. Architecturally, both operations are independent and could run in parallel using LangGraph's parallel node execution, which would reduce latency.
-
 ### Cross-Encoder Efficiency
 The current LLM-based cross-encoder makes one API call per document. A dedicated neural cross-encoder model (e.g., ms-marco) would be faster and cheaper for high-traffic scenarios, though it would add a separate model deployment.
 
