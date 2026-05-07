@@ -222,3 +222,12 @@ RAGAS scores from live English testing session (2026-05-07, scale 0–10):
 **Average: 7.9/10 overall · Pass rate (≥7.0): 5/7 questions**
 
 Low scores on two edge cases: the VAT question pulled an outdated 2014 invoice chunk instead of the definition, and the min wage question returned how the wage is set by law rather than the actual 2026 figure — a retrieval gap, not a generation error.
+
+---
+
+## Future Improvements
+
+- **MCP query optimization** — send a short keyword query to DuckDuckGo instead of the full question, to improve retrieval of specific figures (e.g. minimum wage amount)
+- **Parallel hybrid search** — run VectorDB and BM25 in parallel using LangGraph's parallel nodes to reduce latency
+- **Expanded knowledge base** — add environmental, licensing, and IP law codes to cover more SMB scenarios
+- **Kazakh-language embeddings** — add a dedicated KZ-language embedding model alongside the current RU/EN pipeline
