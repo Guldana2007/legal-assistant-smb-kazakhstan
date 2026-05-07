@@ -207,11 +207,16 @@ Covers: Query Rewrite, RRF Fusion, Doc Grader, Hallucination Check, full pipelin
 
 ## Evaluation Results
 
-Sample RAGAS scores from `eval_results/`:
+RAGAS scores from `eval_results/eval_2026-05-02_00-48.txt` (8 questions, scale 0–10):
 
-| Query | Faithfulness | Answer Relevancy |
-|-------|-------------|-----------------|
-| Labor Code vacation days | 0.92 | 0.88 |
-| Tax Code VAT rate | 0.95 | 0.91 |
-| Civil Code statute of limitations | 0.89 | 0.85 |
-| Min wage 2026 (MCP) | 0.87 | 0.90 |
+| Query | Faith | Relev | Score | Source |
+|-------|-------|-------|-------|--------|
+| Min wage 2026 | 10.0 | 9.9 | 10.0 | MCP ✅ |
+| Civil Code statute of limitations | 10.0 | 5.7 | 7.8 | Local ✅ |
+| ИП registration | 6.7 | 8.2 | 7.4 | Local+MCP ✅ |
+| Labor Code vacation days | 6.7 | 8.4 | 7.5 | Local ✅ |
+| КПН tax rates for SMB | 6.0 | 6.7 | 6.3 | MCP ✅ |
+
+**Average: 6.2/10 overall · Pass rate (≥7.0): 4/8 questions**
+
+Low scores on edge cases: out-of-scope questions (future law changes) and complex tax queries where MCP returned partial data.

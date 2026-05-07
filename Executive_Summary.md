@@ -92,14 +92,15 @@ The pipeline consists of **8 steps** orchestrated by a LangGraph StateGraph:
 
 The system was tested on representative SMB legal questions:
 
-| Query | Source | Result |
-|-------|--------|--------|
-| МЗП 2026 (minimum wage) | MCP → adilet.zan.kz | 85,000 KZT — correct |
-| Civil Code statute of limitations | RAG (local DB) | 3 years — correct |
-| Labor Code vacation days | RAG (local DB) | 24 calendar days — correct |
-| Tax Code VAT rate | RAG (local DB) | 12% — correct |
+| Query | Source | Score | Result |
+|-------|--------|-------|--------|
+| МЗП 2026 (minimum wage) | MCP → adilet.zan.kz | 10.0/10 | 85,000 KZT — correct |
+| Labor Code vacation days | RAG (local DB) | 7.5/10 | 24 calendar days — correct |
+| Civil Code statute of limitations | RAG (local DB) | 7.8/10 | 3 years — correct |
+| ИП registration | RAG + MCP | 7.4/10 | Correct procedure — correct |
 
-RAGAS scores on answered queries typically range **7–9/10** for Faithfulness and Answer Relevancy, indicating well-grounded, reliable responses.
+**Average RAGAS score: 6.2/10 across 8 test questions. Pass rate (≥7.0): 4/8.**  
+Strong results on well-defined legal questions; lower scores on out-of-scope queries (expected behaviour for a domain-specific assistant).
 
 ---
 
