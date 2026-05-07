@@ -17,7 +17,7 @@
 | Quality evaluation (RAGAS) | ✅ Done | Faithfulness + AnswerRelevancy, gpt-4o-mini judge |
 | Observability | ✅ Done | LangFuse tracing with full pipeline trace + token costs |
 | Document upload at runtime | ✅ Done | PDF + DOCX indexing via Gradio UI |
-| Test suite | ✅ Done | 24 tests (10 unit + 14 integration) |
+| Test suite | ✅ Done | 24/24 pass — 10 unit + 14 integration (verified 2026-05-07) |
 | User feedback (👍/👎) | ⚠️ Partial | Not implemented — identified as missing NFR |
 
 ---

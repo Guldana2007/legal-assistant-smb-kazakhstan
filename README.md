@@ -169,7 +169,7 @@ python -m pytest tests/ -v -m integration
 python -m pytest tests/ -v
 ```
 
-**24 tests total:** 10 unit + 14 integration  
+**24/24 tests pass:** 10 unit + 14 integration ✅ (verified 2026-05-07)  
 Covers: Query Rewrite, RRF Fusion, Doc Grader, Hallucination Check, full pipeline (positive + negative scenarios), multilingual mode, adversarial inputs.
 
 ---
