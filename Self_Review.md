@@ -66,6 +66,9 @@ The current LLM-based cross-encoder makes one API call per document. A dedicated
 ### Knowledge Base Coverage
 The current knowledge base covers 4 major legal codes. Adding more regulatory documents (environmental, licensing, IP law) would expand coverage for SMB needs.
 
+### MCP Faithfulness vs. URL Resolution
+RAGAS Faithfulness for MCP answers depends on whether the retrieved snippets actually contain the specific answer — not on URL presence. When MCP finds snippets with direct content (e.g. egov.kz page mentioning "Personal Account → My applications"), Faithfulness is 10.0/10. When MCP returns general or off-topic snippets, the LLM fills gaps from its own knowledge and Faithfulness drops (e.g. 2.0/10 for state duty fees where MCP returned passport/investment pages instead of fee schedules). Fix: shorter keyword queries to improve snippet relevance + full-page scraping when a URL is resolved.
+
 ---
 
 ## 5. Lessons Learned
@@ -84,4 +87,4 @@ The project successfully implements a production-grade agentic RAG system that g
 
 User feedback (👍/👎) is implemented and logged to LangFuse, completing the evaluation loop from automated RAGAS metrics to human signals.
 
-**Self-score: 9 / 10**
+

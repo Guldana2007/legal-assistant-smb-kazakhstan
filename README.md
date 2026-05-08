@@ -225,8 +225,20 @@ Low scores on two edge cases: the VAT question pulled an outdated 2014 invoice c
 
 ---
 
+## Known Limitations
+
+**MCP Faithfulness depends on snippet content quality, not URL presence.** When MCP retrieves snippets that directly contain the answer, the LLM grounds its response in that content and RAGAS Faithfulness is high. When MCP retrieves off-topic or general snippets that do not contain the specific answer, the LLM fills gaps from its own knowledge — RAGAS then scores Faithfulness low because the specific details cannot be traced back to the retrieved context. Answer Relevancy remains high in both cases.
+
+Examples:
+- "What are the sanitary requirements for opening a food service establishment?" → MCP found `adilet.zan.kz` food safety law with specific content → Faithfulness **10.0/10**
+- "How do I check the status of my business registration on egov.kz?" → MCP snippets from egov.kz explicitly mentioned "Personal Account → My applications" → Faithfulness **10.0/10**
+- "What are the current state duty fees for registering a business?" → MCP returned general investment/passport pages without fee figures → LLM used own knowledge → Faithfulness **2.0/10**
+
+---
+
 ## Future Improvements
 
-- **MCP query optimization** — send a short keyword query to DuckDuckGo instead of the full question, to improve retrieval of specific figures (e.g. minimum wage amount)
+- **MCP query optimization** — send a short keyword query to DuckDuckGo instead of the full question, to improve URL resolution rate and reduce snippet-only results
+- **Full-page MCP scraping** — when a URL is found, scrape the full page instead of the snippet to provide richer context for the LLM and improve Faithfulness scores
 - **Expanded knowledge base** — add environmental, licensing, and IP law codes to cover more SMB scenarios
 - **Kazakh-language embeddings** — add a dedicated KZ-language embedding model alongside the current RU/EN pipeline

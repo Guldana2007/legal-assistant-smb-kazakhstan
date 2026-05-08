@@ -17,9 +17,9 @@ llm = ChatOpenAI(model="gpt-4.1-mini", temperature=0)
 
 PROMPT = ChatPromptTemplate.from_messages([
     ("system",
-     "Assess whether the fragment is relevant to the question (they may be in different languages).\n"
-     "Return true if the fragment contains information related to the topic of the question.\n"
-     "Return false only if the fragment is completely unrelated.\n"
+     "Assess whether the fragment directly helps answer the question (they may be in different languages).\n"
+     "Return true ONLY if the fragment contains specific information that directly answers the question.\n"
+     "Return false if the fragment only shares keywords or is tangentially related but does not actually answer the question.\n"
      "Reply STRICTLY as JSON: {{\"relevant\": true|false, \"reason\": \"briefly\"}}"),
     ("human", "Question: {question}\n\nFragment:\n{doc}"),
 ])

@@ -41,7 +41,28 @@ The pipeline consists of **8 steps** orchestrated by a LangGraph StateGraph:
 | 7 | Reflect | RAGAS judge (gpt-4o-mini); accepts answer or triggers retry |
 | 8 | Reformulate | Rewrites query with new expansion strategy for retry |
 
-**MCP Fallback:** when Doc Grader finds fewer than 2 relevant chunks, the system queries official Kazakhstan government portals live via a custom MCP server (`adilet.zan.kz`, `kgd.gov.kz`, `egov.kz`). After MCP, all documents always pass through Cross-Encoder before generation.
+### How the pipeline flows
+
+**Step 1 — Query Rewrite:** The user's question is received. If the language is English or Kazakh, it is translated to Russian (the language of the knowledge base). The query is then expanded using one of 4 strategies: HyDE, Step-Back, Keyword, or none.
+
+**Steps 2a/2b — Hybrid Search:** Vector search (ChromaDB) retrieves 15 documents by semantic meaning; BM25 retrieves 15 documents by keyword matching. Both run in parallel.
+
+**Step 2c — RRF Fusion:** Both result lists are merged using Reciprocal Rank Fusion → top 8 documents.
+
+**Step 3 — Doc Grader:** Each of the 8 documents is evaluated by an LLM for relevance. Runs in parallel (ThreadPoolExecutor).
+> **Condition:** if fewer than 2 relevant documents are found → **MCP fallback**: the system queries live government portals (`adilet.zan.kz`, `kgd.gov.kz`, `egov.kz`), then continues to step 4.
+
+**Step 4 — Cross-Encoder:** LLM re-ranks all documents with a score 0–10. Always runs — both after RAG and after MCP.
+
+**Step 5 — LLM Generate:** GPT-4.1-mini generates the answer with source citations.
+
+**Step 6 — Hallucination Check:** LLM verifies that every fact in the answer is supported by the retrieved documents. If not grounded, sets a flag that Reflect (step 7) uses to trigger retry.
+
+**Step 7 — Reflect (RAGAS):** gpt-4o-mini evaluates answer quality: Faithfulness + Answer Relevancy.
+> **Condition:** if overall score ≥ 7/10 → answer accepted, done. If score < 7/10 → go to step 8.
+
+**Step 8 — Reformulate:** The query is rewritten with a different expansion strategy and the pipeline loops back to step 1.
+> **Retry loop:** maximum 3 attempts. After the 3rd attempt, the best answer obtained is returned.
 
 ---
 
@@ -72,6 +93,12 @@ The pipeline consists of **8 steps** orchestrated by a LangGraph StateGraph:
 | Observability | LangFuse |
 | UI | Gradio (streaming, multilingual) |
 | Live data | Custom FastMCP server |
+
+### Why RAGAS?
+RAGAS provides automated, reference-free evaluation specifically designed for RAG systems. **Faithfulness** checks whether every fact in the answer is grounded in the retrieved documents. **Answer Relevancy** checks whether the answer actually addresses the question. Together they cover the two main failure modes of RAG — hallucination and irrelevance. Running RAGAS after every response closes the quality loop automatically and drives the retry decision: if the score is below 7/10, the system reformulates the query and tries again. Cost: ~$0.001 per evaluation (gpt-4o-mini as judge) — up to 100× cheaper than using GPT-4o as evaluator, and far more scalable than human annotation.
+
+### Why LangFuse?
+LangFuse provides full observability over the pipeline at zero infrastructure cost — it is **free and open-source**, deployable locally via Docker. Every LLM call, token count, latency, RAGAS score, and user feedback (👍/👎) is logged as a structured trace. This makes it possible to debug retrieval failures, monitor costs in real time, and track quality trends across sessions — without sending any data to a third-party cloud.
 
 ---
 
