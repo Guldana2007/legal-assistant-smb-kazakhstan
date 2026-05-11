@@ -3,7 +3,6 @@ from .vector_db          import node_retrieve_vector
 from .bm25_index         import node_retrieve_bm25
 from .rrf_fusion         import node_rrf_fusion
 from .doc_grader         import node_doc_grader
-from .web_search         import node_web_search
 from .cross_encoder      import node_cross_encoder
 from .llm_generate       import node_generate
 from .hallucination_check import node_hallucination_check

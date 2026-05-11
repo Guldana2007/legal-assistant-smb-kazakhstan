@@ -10,7 +10,7 @@ from langchain_chroma import Chroma
 
 from .shared import add_trace
 
-CHROMA_DIR = Path(__file__).parent.parent / "chroma_db_seminar2"
+CHROMA_DIR = Path(__file__).parent.parent / "chroma_db_legal"
 COLLECTION  = "bayan_sulu_rag"
 
 embeddings  = OpenAIEmbeddings(model="text-embedding-3-small")

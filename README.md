@@ -23,20 +23,28 @@ The system answers legal questions about Kazakhstan legislation by combining loc
 
 ## Architecture
 
-![Architecture Diagram](architecture_diagram.png)
+![Architecture Diagram](architecture_diagram_v4.png)
 
-**8 pipeline steps, 7 LLM agents:**
+**LangGraph Graph Walk — 3 specialized agents, 8 pipeline steps:**
 
-| # | Agent | Role |
-|---|-------|------|
+| # | Agent | Steps | Role |
+|---|-------|-------|------|
+| 1 | **Retrieval Agent** | 1–4 + MCP fallback | Query rewrite, hybrid search (Vector DB + BM25), RRF fusion, doc grading, cross-encoder re-ranking. Falls back to MCP live search when fewer than 2 relevant docs are found. |
+| 2 | **Generation Agent** | 5–6 | Generates the answer (GPT-4.1-mini) with source citations; verifies every fact is grounded in retrieved context. |
+| 3 | **Orchestrating Agent** | 7–8 | RAGAS judge — autonomously decides: accept answer / retry retrieval / retry generation / stop. The only node that makes independent decisions. |
+
+**Pipeline steps:**
+
+| Step | Name | Description |
+|------|------|-------------|
 | 1 | Query Rewrite | Translates EN/KZ→RU; expands query (HyDE / Step-Back / Keyword / none) |
-| 2a/2b | Hybrid Search | ChromaDB semantic (15 docs) + BM25 lexical (15 docs) in parallel |
+| 2a/2b | Hybrid Search | ChromaDB semantic (15 docs) + BM25 lexical (15 docs) |
 | 2c | RRF Fusion | Reciprocal Rank Fusion (K=60) → top 8 docs |
 | 3 | Doc Grader | Filters irrelevant chunks in parallel (LLM per doc) |
-| 4 | Cross-Encoder | LLM re-ranking, scores 0–10 (gpt-4.1-mini) — always runs |
+| 4 | Cross-Encoder | LLM re-ranking, scores 0–10 |
 | 5 | LLM Generate | GPT-4.1-mini generates answer with source citations |
 | 6 | Hallucination Check | Verifies every fact is grounded in retrieved context |
-| 7 | Reflect | RAGAS judge (gpt-4o-mini); accepts or triggers retry |
+| 7 | Reflect ★ | RAGAS judge; accepts or triggers retry (autonomous decision) |
 | 8 | Reformulate | Rewrites query with new strategy for retry_retrieval |
 
 **MCP fallback:** when Doc Grader finds < 2 relevant chunks, queries government portals live via custom MCP server. After MCP, always passes through Cross-Encoder.
