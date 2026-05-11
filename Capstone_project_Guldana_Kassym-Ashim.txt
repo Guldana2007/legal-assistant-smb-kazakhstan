@@ -3,3 +3,27 @@ guldana_kassym-ashim@epam.com
 GitHub: https://github.com/Guldana2007/legal-assistant-smb-kazakhstan
 
 Video: [link to be added]
+
+---
+
+Project: Agentic RAG Legal Assistant for SMB in Kazakhstan
+Architecture: LangGraph Graph Walk — 3 specialized agents
+
+Agent 1 — Retrieval Agent
+Responsible for finding relevant legal documents. Uses the following tools:
+- Tool: Query Rewrite — translates (EN/KZ→RU) and expands the query (HyDE / Step-Back / Keyword / none)
+- Tool: Hybrid Search — ChromaDB semantic search (15 docs) + BM25 lexical search (15 docs)
+- Tool: RRF Fusion — merges results via Reciprocal Rank Fusion → top 8 docs
+- Tool: Doc Grader — filters irrelevant chunks using parallel LLM calls
+- Tool: Cross-Encoder — re-ranks remaining docs (LLM scoring 0–10)
+- Tool: MCP Legal Search — live search on adilet.zan.kz, kgd.gov.kz, egov.kz via custom FastMCP server (triggered when Doc Grader finds fewer than 2 relevant docs)
+
+Agent 2 — Generation Agent
+Responsible for producing the final answer. Uses the following tools:
+- Tool: LLM Generate (GPT-4.1-mini) — generates a grounded answer with source citations
+- Tool: Hallucination Check — verifies every fact is traceable to retrieved context
+
+Agent 3 — Orchestrating Agent ★
+The autonomous decision-maker of the system:
+- Reflect — runs RAGAS evaluation (Faithfulness + Answer Relevancy) and independently decides: accept the answer / retry retrieval / retry generation / stop (up to N attempts)
+- Tool: Reformulate — rewrites the query with a new expansion strategy when retry_retrieval is triggered
