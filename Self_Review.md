@@ -68,6 +68,9 @@ The current LLM-based cross-encoder makes one API call per document. A dedicated
 ### Knowledge Base Coverage
 The current knowledge base covers 4 major legal codes. Adding more regulatory documents (environmental, licensing, IP law) would expand coverage for SMB needs.
 
+### Reflect Fast-Path May Accept Low-Quality Answers
+On the first attempt, if `hallucination_ok=True`, Reflect accepts immediately without running RAGAS. RAGAS runs asynchronously after streaming. This means an answer scoring 3.5/10 can be accepted because the system had no score at decision time — only the hallucination check (facts grounded) was evaluated. On retries, RAGAS always runs synchronously. Fix: remove the fast-path and run RAGAS on all attempts, adding ~5–10 seconds to first-attempt latency.
+
 ### LangFuse Cost Tracking
 LangFuse traces show $0.00 cost and zero token usage because the integration uses the Python SDK's `_lf_client.trace()` directly — logging the full pipeline input, output, RAGAS scores, and metadata — but does not instrument individual OpenAI API calls as LangFuse generation spans. Without generation-level spans (model name + token counts), LangFuse has no data to price. Actual per-query cost (~$0.01) is tracked in the OpenAI Dashboard. The decision to use SDK-level tracing rather than LangChain callbacks was intentional: LangChain callbacks conflict with Gradio's streaming generator pattern, causing incomplete traces. A future improvement is to wrap each LLM call in a `_lf_client.generation()` span to capture token costs inside LangFuse.
 

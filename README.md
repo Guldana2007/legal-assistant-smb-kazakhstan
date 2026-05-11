@@ -282,6 +282,8 @@ Low scores on two edge cases: the VAT question pulled an outdated 2014 invoice c
 
 **LangFuse shows $0.00 cost.** The integration uses the Python SDK's `trace()` method to log pipeline-level data (input, output, RAGAS scores, retry metadata). Individual OpenAI API calls are not wrapped as LangFuse generation spans, so token counts and per-call costs are not captured inside LangFuse. Actual cost (~$0.01/query) is tracked in the OpenAI Dashboard. The SDK approach was chosen over LangChain callbacks because callbacks conflict with Gradio's streaming generator pattern.
 
+**Reflect uses a fast-path on the first attempt.** When `hallucination_ok=True` on attempt 0, Reflect accepts the answer immediately without running RAGAS — to keep first-response latency low. RAGAS is computed asynchronously afterwards and displayed in the UI ~5 seconds later. This means a low-scoring answer (e.g. 3.5/10) can be accepted on the first attempt if the hallucination check passed. On retries (attempts 1+), RAGAS always runs synchronously and drives the accept/retry decision. Fix: run RAGAS synchronously on all attempts at the cost of ~5–10 seconds added to first-attempt latency.
+
 **MCP Faithfulness depends on snippet content quality, not URL presence.** When MCP retrieves snippets that directly contain the answer, the LLM grounds its response in that content and RAGAS Faithfulness is high. When MCP retrieves off-topic or general snippets that do not contain the specific answer, the LLM fills gaps from its own knowledge — RAGAS then scores Faithfulness low because the specific details cannot be traced back to the retrieved context. Answer Relevancy remains high in both cases.
 
 Examples:
