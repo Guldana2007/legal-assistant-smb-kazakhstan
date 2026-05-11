@@ -302,3 +302,4 @@ Examples:
 - **Full-page MCP scraping** — when a URL is found, scrape the full page instead of the snippet to provide richer context for the LLM and improve Faithfulness scores
 - **Expanded knowledge base** — add environmental, licensing, and IP law codes to cover more SMB scenarios
 - **Kazakh-language embeddings** — add a dedicated KZ-language embedding model alongside the current RU/EN pipeline
+- **Latency optimization** — reduce first-response time across the pipeline
