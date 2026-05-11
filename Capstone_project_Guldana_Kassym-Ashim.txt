@@ -27,3 +27,13 @@ Agent 3 — Orchestrating Agent ★
 The autonomous decision-maker of the system:
 - Reflect — runs RAGAS evaluation (Faithfulness + Answer Relevancy) and independently decides: accept the answer / retry retrieval / retry generation / stop (up to N attempts)
 - Tool: Reformulate — rewrites the query with a new expansion strategy when retry_retrieval is triggered
+
+---
+
+The architecture is closest to Scenario 1 (Personal Knowledge Assistant) — document RAG combined with live web search fallback via MCP — applied to the Kazakhstan legal domain.
+The mapping is direct:
+- Research Agent → Retrieval Agent (indexes 4 legal codes in ChromaDB)
+- Web Agent → MCP Legal Search (live search on government portals)
+- Synthesis Agent → Generation Agent (combines RAG + MCP context, generates answer)
+
+The key addition beyond Scenario 1 is the Orchestrating Agent (Reflect) — a true autonomous agent, as it independently evaluates answer quality via RAGAS and decides whether to accept, retry retrieval, retry generation, or stop.
