@@ -291,6 +291,8 @@ Examples:
 - "How do I check the status of my business registration on egov.kz?" → MCP snippets from egov.kz explicitly mentioned "Personal Account → My applications" → Faithfulness **10.0/10**
 - "What are the current state duty fees for registering a business?" → MCP returned general investment/passport pages without fee figures → LLM used own knowledge → Faithfulness **2.0/10**
 
+**Out-of-scope questions: Faithfulness = 0.0, FORCE ACCEPT after 3 attempts.** When a question falls completely outside the 4 legal codes and MCP finds no links on government portals (e.g. "If a customer slips in my shop, am I liable?"), the system has no grounded context. Doc Grader filters all documents (0 kept), MCP returns no links, LLM generates an answer from its own general knowledge. Hallucination Check correctly flags this as `Grounded: False`. RAGAS Faithfulness = 0.0 because no retrieved facts support the answer. The system retries all 3 attempts and then FORCE ACCEPTs the best answer obtained. This is expected behavior — the system correctly signals the knowledge gap rather than silently returning an ungrounded answer.
+
 ---
 
 ## Future Improvements
