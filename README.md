@@ -183,8 +183,43 @@ python -m pytest tests/ -v -m integration
 python -m pytest tests/ -v
 ```
 
-**24/24 tests pass:** 10 unit + 14 integration ✅ (verified 2026-05-07)  
-Covers: Query Rewrite, RRF Fusion, Doc Grader, Hallucination Check, full pipeline (positive + negative scenarios), multilingual mode, adversarial inputs.
+**24/24 tests pass:** 10 unit + 14 integration ✅ (verified 2026-05-11)
+
+```
+platform win32 -- Python 3.11.0, pytest-9.0.3
+
+UNIT TESTS (10/10 passed, 31s)
+tests/test_pipeline.py::TestQueryRewrite::test_no_expansion_returns_original    PASSED
+tests/test_pipeline.py::TestQueryRewrite::test_returns_non_empty_query          PASSED
+tests/test_pipeline.py::TestRRFFusion::test_fuses_both_sources                  PASSED
+tests/test_pipeline.py::TestRRFFusion::test_rrf_scores_assigned                 PASSED
+tests/test_pipeline.py::TestRRFFusion::test_empty_inputs_returns_empty          PASSED
+tests/test_pipeline.py::TestDocGrader::test_relevant_document_kept              PASSED
+tests/test_pipeline.py::TestDocGrader::test_irrelevant_document_filtered        PASSED
+tests/test_pipeline.py::TestDocGrader::test_empty_docs_returns_empty            PASSED
+tests/test_pipeline.py::TestHallucinationCheck::test_grounded_answer_passes     PASSED
+tests/test_pipeline.py::TestHallucinationCheck::test_hallucinated_answer_flagged PASSED
+
+INTEGRATION TESTS (14/14 passed, ~4 min)
+tests/test_pipeline.py::TestPositiveScenarios::test_labor_vacation_days         PASSED
+tests/test_pipeline.py::TestPositiveScenarios::test_vat_rate                    PASSED
+tests/test_pipeline.py::TestPositiveScenarios::test_civil_code_statute_of_limitations PASSED
+tests/test_pipeline.py::TestPositiveScenarios::test_decision_is_accept          PASSED
+tests/test_pipeline.py::TestPositiveScenarios::test_sources_cited_in_answer     PASSED
+tests/test_pipeline.py::TestPositiveScenarios::test_pipeline_english_mode       PASSED
+tests/test_pipeline.py::TestPositiveScenarios::test_pipeline_kazakh_mode        PASSED
+tests/test_pipeline.py::TestPositiveScenarios::test_all_required_fields_present PASSED
+tests/test_pipeline.py::TestNegativeScenarios::test_off_topic_question          PASSED
+tests/test_pipeline.py::TestNegativeScenarios::test_prompt_injection_attack     PASSED
+tests/test_pipeline.py::TestNegativeScenarios::test_empty_question_handled      PASSED
+tests/test_pipeline.py::TestNegativeScenarios::test_very_long_question          PASSED
+tests/test_pipeline.py::TestNegativeScenarios::test_special_characters          PASSED
+tests/test_pipeline.py::TestNegativeScenarios::test_question_wrong_country      PASSED
+
+24 passed in 255s
+```
+
+Covers: Query Rewrite, RRF Fusion, Doc Grader, Hallucination Check, full pipeline (positive + negative scenarios), multilingual mode (RU/KZ/EN), adversarial inputs (prompt injection, XSS, empty input, off-topic).
 
 ---
 
