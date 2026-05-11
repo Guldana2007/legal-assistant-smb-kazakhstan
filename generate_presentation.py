@@ -120,7 +120,7 @@ for i, (icon, title, desc, color) in enumerate(badges):
     txt(s, desc,  bl+Inches(0.58), bt+Inches(0.4),  bw-Inches(0.7),   Inches(0.25),
         size=11, color=SLATE)
 
-for i, (num, lbl) in enumerate([("11","Nodes"),("7","AI Agents"),("4","Legal Codes"),("3","Gov Sources")]):
+for i, (num, lbl) in enumerate([("3","Agents"),("8","Pipeline Steps"),("4","Legal Codes"),("3","Gov Sources")]):
     tp = Inches(1.1) + i * Inches(1.5)
     txt(s, num,  W-Inches(3.8), tp,            Inches(3.5), Inches(0.75),
         size=34, bold=True, color=GOLD, align=PP_ALIGN.CENTER)
@@ -159,7 +159,7 @@ ORANGE = RGBColor(0xF9, 0x73, 0x16)
 costs = [
     ("👨‍⚖️", "Lawyer (1 hour)",     "$20 – $100",   GOLD,   "Traditional consultation"),
     ("📋",         "PRG / Paragraf (KZ)", "$17 – $45/mo",  ORANGE, "Kazakhstan legal DB subscription"),
-    ("🤖",         "Our AI (1 query)",   "~$0.01",        GREEN,  "1,000 queries ≈ $8"),
+    ("🤖",         "Our AI (1 query)",   "~$0.01",        GREEN,  "incl. RAGAS eval  •  1,000 queries ≈ $8"),
 ]
 for i, (icon, label, cost, color, sub) in enumerate(costs):
     cl  = Inches(0.5) + i * Inches(4.2)
@@ -190,7 +190,7 @@ bg(s, OFF_WHITE)
 header(s, "Technology Stack", "Production-grade components — all integrated", BLUE)
 
 stack = [
-    ("🧠", "LangGraph",      DARK_BLUE, "Agentic orchestration\n11 nodes, conditional routing\nTypedDict state management"),
+    ("🧠", "LangGraph",      DARK_BLUE, "Agentic orchestration\n3 agents, 8 pipeline steps\nTypedDict state management"),
     ("🤖", "GPT-4.1-mini",   BLUE,      "LLM for all agents\nGeneration, grading\n& reasoning"),
     ("🔍", "Hybrid Search",  BRIGHT,    "ChromaDB vector search\n+ BM25 keyword search\nRRF Fusion — best of both"),
     ("🌐", "MCP Server",     GREEN,     "Custom FastMCP server\nadilet.zan.kz + kgd.gov.kz\n+ egov.kz live data"),
@@ -219,9 +219,9 @@ for i, (icon, title, color, desc) in enumerate(stack):
 # ═══════════════════════════════════════════════════════════
 s = blank(prs)
 bg(s, OFF_WHITE)
-header(s, "Pipeline Architecture", "Agentic RAG with retry loop — 11 nodes, 7 agents", DARK_BLUE)
+header(s, "Pipeline Architecture", "Agentic RAG with retry loop — 3 specialized agents, 8 pipeline steps", DARK_BLUE)
 
-arch_path = r"c:\Users\Dana\Capstone_EPAM\architecture_diagram.png"
+arch_path = r"c:\Users\Dana\Capstone_EPAM\architecture_diagram_v4.png"
 if os.path.exists(arch_path):
     s.shapes.add_picture(arch_path, Inches(0.2), Inches(1.32), Inches(12.93), Inches(5.98))
 
