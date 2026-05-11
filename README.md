@@ -207,8 +207,12 @@ Covers: Query Rewrite, RRF Fusion, Doc Grader, Hallucination Check, full pipelin
 │   └── test_pipeline.py            # 24 tests (10 unit + 14 integration)
 ├── eval_results/                   # RAGAS evaluation output (JSON + TXT)
 ├── docker-compose.langfuse.yml     # LangFuse + PostgreSQL
-├── architecture_diagram.png        # System architecture diagram
-└── architecture_diagram.svg        # Architecture diagram (vector)
+├── architecture_diagram_v4.png     # Final architecture diagram (3 agents)
+├── architecture_diagram_v4.svg     # Architecture diagram — vector
+├── Executive_Summary.md            # 1–2 page project overview
+├── Self_Review.md                  # Architecture decisions and trade-offs
+├── Capstone_Presentation.pptx      # Slide deck
+└── .env.example                    # Environment variable template
 ```
 
 ---
