@@ -15,11 +15,11 @@ from .shared import add_trace
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 
-async def _call_mcp_search(query: str) -> str:
+async def _call_mcp_search(query: str, language: str = "ru") -> str:
     """Call MCP server search function for Kazakhstan legal database."""
     try:
         from mcp_server.legal_kz_server import _search_adilet
-        result = await _search_adilet(query, max_results=6)
+        result = await _search_adilet(query, max_results=6, language=language)
         return result
     except Exception as e:
         return f"MCP search error: {e}"
@@ -29,11 +29,12 @@ def node_mcp_legal_search(state: dict) -> dict:
     """LangGraph node: searches Kazakhstan law via MCP → adilet.zan.kz."""
     # Always use original question — more specific than reformulated query
     query = state.get("question", state.get("current_query", ""))
+    language = state.get("language", "ru")
 
     try:
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        result = loop.run_until_complete(_call_mcp_search(query))
+        result = loop.run_until_complete(_call_mcp_search(query, language))
         loop.close()
     except Exception as e:
         result = f"MCP unavailable: {e}"

@@ -69,6 +69,12 @@ TRANSLATIONS = {
             "Каковы основания для расторжения трудового договора по инициативе работодателя по ТК РК?",
             "Каковы основания для признания сделки недействительной по Гражданскому кодексу РК?",
         ],
+        "scenario3":        "**Сценарий 3 — Сложные / пограничные случаи**",
+        "edge_q": [
+            "Каковы штрафы за несвоевременную подачу налоговой отчётности для МСБ в Казахстане?",
+            "Если покупатель поскользнётся и упадёт в моём магазине, несу ли я ответственность?",
+            "Если я хочу временно закрыть бизнес на время отпуска, нужно ли уведомлять государственные органы?",
+        ],
     },
     "kz": {
         "title":            "# ⚖️ Қазақстан шағын және орта бизнесіне арналған заңдық көмекші",
@@ -109,6 +115,12 @@ TRANSLATIONS = {
             "ҚР ЕК бойынша жұмыс берушінің бастамасымен еңбек шартын бұзудың негіздері қандай?",
             "ҚР АК бойынша мәмілені жарамсыз деп тануының негіздері қандай?",
         ],
+        "scenario3":        "**Сценарий 3 — Күрделі / шекті жағдайлар**",
+        "edge_q": [
+            "Қазақстанда шағын және орта бизнес үшін салықтық есептілікті кешіктіргені үшін айыппұлдар қандай?",
+            "Егер сатып алушы дүкенімде сүрініп жықылса, мен жауапты боламын ба?",
+            "Егер демалысқа бизнесімді уақытша жабқым келсе, мемлекеттік органдарды хабардар ету керек пе?",
+        ],
     },
     "en": {
         "title":            "# ⚖️ Legal Assistant for SMB Kazakhstan",
@@ -148,6 +160,12 @@ TRANSLATIONS = {
             "How many vacation days are employees entitled to in Kazakhstan?",
             "What are the grounds for terminating an employment contract at the employer's initiative under the Labor Code of Kazakhstan?",
             "What are the grounds for declaring a transaction void under the Civil Code of Kazakhstan?",
+        ],
+        "scenario3":        "**Scenario 3 — Edge Cases**",
+        "edge_q": [
+            "What are the penalties for late tax filing for SMEs in Kazakhstan?",
+            "If a customer slips and falls in my shop, am I liable?",
+            "If I want to close my business temporarily for vacation, do I need to notify authorities?",
         ],
     },
 }
@@ -466,15 +484,18 @@ def switch_language(lang: str):
     t = TRANSLATIONS[lang]
     hard_updates = [gr.update(value=q) for q in t["hard_q"]]
     easy_updates = [gr.update(value=q) for q in t["easy_q"]]
+    edge_updates = [gr.update(value=q) for q in t["edge_q"]]
     return (
         gr.update(value=t["title"]),                          # title_md
         gr.update(value=get_chunk_count(lang)),               # header_md
         gr.update(value=t["scenario2"]),                      # scenario2_md
         gr.update(value=t["scenario1"]),                      # scenario1_md
+        gr.update(value=t["scenario3"]),                      # scenario3_md
         gr.update(label=t["q_label"], placeholder=t["q_placeholder"]),  # q_input
         gr.update(value=t["submit"]),                         # ask_btn
         *hard_updates,                                        # hard_btns[0..4]
-        *easy_updates,                                        # easy_btns[0..2]
+        *easy_updates,                                        # easy_btns[0..4]
+        *edge_updates,                                        # edge_btns[0..4]
         gr.update(value=t["upload_title"]),                   # upload_title_md
         gr.update(value=t["upload_section"]),                 # upload_section_md
         gr.update(label=t["file_label"]),                     # file_input
@@ -622,6 +643,12 @@ with gr.Blocks(title="Legal Assistant for SMB Kazakhstan", css=CSS, theme=gr.the
                                 gr.Button(q, size="sm", variant="secondary")
                                 for q in _t["easy_q"]
                             ]
+                        with gr.Column():
+                            scenario3_md = gr.Markdown(_t["scenario3"])
+                            edge_btns = [
+                                gr.Button(q, size="sm", variant="secondary")
+                                for q in _t["edge_q"]
+                            ]
 
                 with gr.Column(scale=1):
                     max_att   = gr.Slider(1, 5, value=3, step=1, label="Max Attempts")
@@ -684,6 +711,11 @@ with gr.Blocks(title="Legal Assistant for SMB Kazakhstan", css=CSS, theme=gr.the
                     fn=lambda lang, idx=i: TRANSLATIONS[lang]["easy_q"][idx],
                     inputs=[lang_state], outputs=[q_input],
                 )
+            for i, btn in enumerate(edge_btns):
+                btn.click(
+                    fn=lambda lang, idx=i: TRANSLATIONS[lang]["edge_q"][idx],
+                    inputs=[lang_state], outputs=[q_input],
+                )
 
         # ══════════════════════════════════════
         #  TAB 2: Загрузка документов
@@ -741,9 +773,9 @@ with gr.Blocks(title="Legal Assistant for SMB Kazakhstan", css=CSS, theme=gr.the
         fn=switch_language,
         inputs=[lang_selector],
         outputs=[
-            title_md, header_md, scenario2_md, scenario1_md,
+            title_md, header_md, scenario2_md, scenario1_md, scenario3_md,
             q_input, ask_btn,
-            *hard_btns, *easy_btns,
+            *hard_btns, *easy_btns, *edge_btns,
             upload_title_md, upload_section_md,
             file_input, upload_btn,
             delete_section_md, delete_input, delete_btn,
