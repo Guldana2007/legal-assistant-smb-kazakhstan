@@ -14,11 +14,11 @@ The system answers legal questions about Kazakhstan legislation by combining loc
 
 **Pipeline:**
 ```
-1. Query Rewrite → 2a/2b. Hybrid Search (Vector DB + BM25)
-  → 2c. RRF Fusion → 3. Doc Grader
+1. Query Rewrite → 2a. Vector DB → 2b. BM25 → 2c. RRF Fusion → 3. Doc Grader
   → 4. Cross-Encoder → 5. LLM Generate → 6. Hallucination Check → 7. Reflect
-  └─ fallback: Doc Grader (<2 docs) → MCP → 4. Cross-Encoder
-  └─ retry:    7. Reflect → 8. Reformulate → 1. Query Rewrite (up to 3 attempts)
+  └─ fallback:          Doc Grader (<2 docs) → MCP → 4. Cross-Encoder
+  └─ retry_retrieval:   7. Reflect → 8. Reformulate → 1. Query Rewrite (up to 3 attempts)
+  └─ retry_generation:  7. Reflect → 5. LLM Generate (skips retrieval, faithfulness ≥ 5)
 ```
 
 ## Architecture
@@ -44,10 +44,16 @@ The system answers legal questions about Kazakhstan legislation by combining loc
 | 4 | Cross-Encoder | LLM re-ranking, scores 0–10 |
 | 5 | LLM Generate | GPT-4.1-mini generates answer with source citations |
 | 6 | Hallucination Check | Verifies every fact is grounded in retrieved context |
-| 7 | Reflect ★ | RAGAS judge; accepts or triggers retry (autonomous decision) |
-| 8 | Reformulate | Rewrites query with new strategy for retry_retrieval |
+| 7 | Reflect ★ | Fast-accept on attempt 0 if grounded; else runs RAGAS and decides: accept (≥7/10) / retry_retrieval (faithfulness <5) / retry_generation (score <7, faithfulness ≥5) |
+| 8 | Reformulate | Rewrites query with next expansion strategy; used only for retry_retrieval |
 
 **MCP fallback:** when Doc Grader finds < 2 relevant chunks, queries government portals live via custom MCP server. After MCP, always passes through Cross-Encoder.
+
+**Two retry paths:**
+- `retry_retrieval` — full restart: Reformulate → Query Rewrite → new retrieval (triggered when faithfulness < 5)
+- `retry_generation` — regeneration only: goes directly back to LLM Generate without new retrieval (triggered when score < 7 but faithfulness ≥ 5)
+
+**RAGAS timing:** on the first attempt Reflect uses a fast path — accepts immediately if the answer is grounded, without running RAGAS. RAGAS scores appear ~5 seconds after the answer, computed asynchronously.
 
 ---
 

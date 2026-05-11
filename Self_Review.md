@@ -25,7 +25,9 @@
 ## 2. Technical Decisions — Rationale
 
 ### Why LangGraph?
-LangGraph provides explicit state management (TypedDict) and conditional routing between agents. This was essential for the retry loop (Reflect → Reformulate → Query Rewrite) and the fallback path (Doc Grader → MCP → Cross-Encoder). A simple chain would not support this level of control flow.
+LangGraph provides explicit state management (TypedDict) and conditional routing between agents. This was essential for two distinct retry paths: `retry_retrieval` (Reflect → Reformulate → Query Rewrite — full pipeline restart when faithfulness < 5) and `retry_generation` (Reflect → LLM Generate directly — skips retrieval when faithfulness ≥ 5 but overall score < 7). A simple chain would not support this level of conditional control flow.
+
+Reflect also uses a **fast path**: on the first attempt, if the hallucination check passed, it accepts immediately without running RAGAS. RAGAS runs asynchronously after the answer is streamed to the user (~5 sec delay in the UI). This keeps the first-attempt response time fast while still providing quality scores for observability.
 
 ### Why Hybrid Search (Vector + BM25)?
 Semantic search alone misses exact legal terms (article numbers, specific monetary amounts). BM25 handles exact keyword matching. RRF Fusion combines both rankings without requiring score normalization — a well-established retrieval technique that consistently outperforms either method alone.
