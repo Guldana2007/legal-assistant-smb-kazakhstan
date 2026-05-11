@@ -239,6 +239,8 @@ Low scores on two edge cases: the VAT question pulled an outdated 2014 invoice c
 
 ## Known Limitations
 
+**LangFuse shows $0.00 cost.** The integration uses the Python SDK's `trace()` method to log pipeline-level data (input, output, RAGAS scores, retry metadata). Individual OpenAI API calls are not wrapped as LangFuse generation spans, so token counts and per-call costs are not captured inside LangFuse. Actual cost (~$0.01/query) is tracked in the OpenAI Dashboard. The SDK approach was chosen over LangChain callbacks because callbacks conflict with Gradio's streaming generator pattern.
+
 **MCP Faithfulness depends on snippet content quality, not URL presence.** When MCP retrieves snippets that directly contain the answer, the LLM grounds its response in that content and RAGAS Faithfulness is high. When MCP retrieves off-topic or general snippets that do not contain the specific answer, the LLM fills gaps from its own knowledge — RAGAS then scores Faithfulness low because the specific details cannot be traced back to the retrieved context. Answer Relevancy remains high in both cases.
 
 Examples:

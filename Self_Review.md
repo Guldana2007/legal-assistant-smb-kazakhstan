@@ -66,6 +66,9 @@ The current LLM-based cross-encoder makes one API call per document. A dedicated
 ### Knowledge Base Coverage
 The current knowledge base covers 4 major legal codes. Adding more regulatory documents (environmental, licensing, IP law) would expand coverage for SMB needs.
 
+### LangFuse Cost Tracking
+LangFuse traces show $0.00 cost and zero token usage because the integration uses the Python SDK's `_lf_client.trace()` directly — logging the full pipeline input, output, RAGAS scores, and metadata — but does not instrument individual OpenAI API calls as LangFuse generation spans. Without generation-level spans (model name + token counts), LangFuse has no data to price. Actual per-query cost (~$0.01) is tracked in the OpenAI Dashboard. The decision to use SDK-level tracing rather than LangChain callbacks was intentional: LangChain callbacks conflict with Gradio's streaming generator pattern, causing incomplete traces. A future improvement is to wrap each LLM call in a `_lf_client.generation()` span to capture token costs inside LangFuse.
+
 ### MCP Faithfulness vs. URL Resolution
 RAGAS Faithfulness for MCP answers depends on whether the retrieved snippets actually contain the specific answer — not on URL presence. When MCP finds snippets with direct content (e.g. egov.kz page mentioning "Personal Account → My applications"), Faithfulness is 10.0/10. When MCP returns general or off-topic snippets, the LLM fills gaps from its own knowledge and Faithfulness drops (e.g. 2.0/10 for state duty fees where MCP returned passport/investment pages instead of fee schedules). Fix: shorter keyword queries to improve snippet relevance + full-page scraping when a URL is resolved.
 
