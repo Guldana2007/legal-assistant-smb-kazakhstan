@@ -288,7 +288,6 @@ Low scores on two edge cases: the VAT question pulled an outdated 2014 invoice c
 
 Examples:
 - "If a customer slips and falls in my shop, am I liable?" → 0/6 local docs kept, MCP found no links on all 3 attempts → LLM answered from own knowledge → Faithfulness **0.0/10**, Score **2.7/10**, FORCE ACCEPT
-- "If I want to close my business temporarily for vacation, do I need to notify authorities?" → 1 partial doc found (Tax Code notification rules, not temporary closure) → MCP found no links → Faithfulness low, Score **4.5/10**, FORCE ACCEPT
 
 ---
 
