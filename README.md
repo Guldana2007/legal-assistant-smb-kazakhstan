@@ -284,15 +284,11 @@ Low scores on two edge cases: the VAT question pulled an outdated 2014 invoice c
 
 **Reflect uses a fast-path on the first attempt.** When `hallucination_ok=True` on attempt 0, Reflect accepts the answer immediately without running RAGAS — to keep first-response latency low. RAGAS is computed asynchronously afterwards and displayed in the UI ~5 seconds later. This means a low-scoring answer (e.g. 3.5/10) can be accepted on the first attempt if the hallucination check passed. On retries (attempts 1+), RAGAS always runs synchronously and drives the accept/retry decision. Fix: run RAGAS synchronously on all attempts at the cost of ~5–10 seconds added to first-attempt latency.
 
-**MCP Faithfulness depends on snippet content quality, not URL presence.** When MCP retrieves snippets that directly contain the answer, the LLM grounds its response in that content and RAGAS Faithfulness is high. When MCP retrieves off-topic or general snippets that do not contain the specific answer, the LLM fills gaps from its own knowledge — RAGAS then scores Faithfulness low because the specific details cannot be traced back to the retrieved context. Answer Relevancy remains high in both cases.
+**Out-of-scope questions: Faithfulness = 0.0, FORCE ACCEPT after 3 attempts.** When a question is outside the 4 legal codes and MCP finds nothing on government portals, the LLM generates an answer from its own knowledge. Hallucination Check flags it as `Grounded: False`. RAGAS Faithfulness = 0.0. The system retries all 3 attempts and FORCE ACCEPTs the best answer. This is expected — the system signals the knowledge gap rather than silently returning an ungrounded answer.
 
 Examples:
-- "What are the sanitary requirements for opening a food service establishment?" → MCP found `adilet.zan.kz` food safety law with specific content → Faithfulness **10.0/10**
-- "How do I check the status of my business registration on egov.kz?" → MCP snippets from egov.kz explicitly mentioned "Personal Account → My applications" → Faithfulness **10.0/10**
-- "What are the current state duty fees for registering a business?" → MCP returned general investment/passport pages without fee figures → LLM used own knowledge → Faithfulness **2.0/10**
-- "What are the penalties for late tax filing for SMEs in Kazakhstan?" → MCP found `adilet.zan.kz` Tax Code page but the retrieved snippet was about electronic digital signatures, not penalties → LLM answered from own knowledge → Faithfulness **0.0/10**, Answer Relevancy **10.0/10**
-
-**Out-of-scope questions: Faithfulness = 0.0, FORCE ACCEPT after 3 attempts.** When a question falls completely outside the 4 legal codes and MCP finds no links on government portals (e.g. "If a customer slips in my shop, am I liable?"), the system has no grounded context. Doc Grader filters all documents (0 kept), MCP returns no links, LLM generates an answer from its own general knowledge. Hallucination Check correctly flags this as `Grounded: False`. RAGAS Faithfulness = 0.0 because no retrieved facts support the answer. The system retries all 3 attempts and then FORCE ACCEPTs the best answer obtained. This is expected behavior — the system correctly signals the knowledge gap rather than silently returning an ungrounded answer.
+- "If a customer slips and falls in my shop, am I liable?" → 0/6 local docs kept, MCP found no links on all 3 attempts → LLM answered from own knowledge → Faithfulness **0.0/10**, Score **2.7/10**, FORCE ACCEPT
+- "If I want to close my business temporarily for vacation, do I need to notify authorities?" → 1 partial doc found (Tax Code notification rules, not temporary closure) → MCP found no links → Faithfulness low, Score **4.5/10**, FORCE ACCEPT
 
 ---
 
