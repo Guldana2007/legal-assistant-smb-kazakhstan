@@ -56,7 +56,7 @@ TRANSLATIONS = {
         "sources_line":     "**Источники:** Локальная база (Налоговый, Трудовой, Гражданский, Предпринимательский кодексы РК) + MCP ([adilet.zan.kz](https://adilet.zan.kz), [kgd.gov.kz](https://kgd.gov.kz), [egov.kz](https://egov.kz))",
         "pipeline_line":    "**Pipeline:** Query Rewrite → Hybrid Search (Vector DB + BM25) → RRF Fusion → Doc Grader → Cross-Encoder → Generate → Hallucination Check → Reflect | нет докум. → MCP → Cross-Encoder | retry → Reformulate (loop)",
         "hard_q": [
-            "Каковы текущие размеры государственных пошлин за регистрацию бизнеса в Казахстане?",
+            "Каковы штрафы за несвоевременную подачу налоговой отчётности для МСБ в Казахстане?",
             "Каковы санитарные требования для открытия предприятия общественного питания в Казахстане?",
             "Как проверить статус заявки на регистрацию бизнеса на портале egov.kz?",
             "Как получить электронную цифровую подпись (ЭЦП) для бизнеса в Казахстане?",
@@ -102,7 +102,7 @@ TRANSLATIONS = {
         "sources_line":     "**Дереккөздер:** Жергілікті база (Салық, Еңбек, Азаматтық, Кәсіпкерлік кодекстер) + MCP ([adilet.zan.kz](https://adilet.zan.kz), [kgd.gov.kz](https://kgd.gov.kz), [egov.kz](https://egov.kz))",
         "pipeline_line":    "**Pipeline:** Query Rewrite → Hybrid Search (Vector DB + BM25) → RRF Fusion → Doc Grader → Cross-Encoder → Generate → Hallucination Check → Reflect | құжат жоқ → MCP → Cross-Encoder | retry → Reformulate (цикл)",
         "hard_q": [
-            "Қазақстанда бизнесті тіркеу үшін мемлекеттік баж салығының ағымдағы мөлшері қандай?",
+            "Қазақстанда шағын және орта бизнес үшін салықтық есептілікті кешіктіргені үшін айыппұлдар қандай?",
             "Қазақстанда қоғамдық тамақтану орнын ашу үшін санитарлық талаптар қандай?",
             "egov.kz порталында бизнесті тіркеу өтінішінің мәртебесін қалай тексеруге болады?",
             "Қазақстанда бизнес үшін электрондық цифрлық қолтаңба (ЭЦҚ) қалай алуға болады?",
@@ -148,7 +148,7 @@ TRANSLATIONS = {
         "sources_line":     "**Sources:** Local database (Tax, Labor, Civil, Entrepreneurship Codes of Kazakhstan) + MCP ([adilet.zan.kz](https://adilet.zan.kz), [kgd.gov.kz](https://kgd.gov.kz), [egov.kz](https://egov.kz))",
         "pipeline_line":    "**Pipeline:** Query Rewrite → Hybrid Search (Vector DB + BM25) → RRF Fusion → Doc Grader → Cross-Encoder → Generate → Hallucination Check → Reflect | no docs → MCP → Cross-Encoder | retry → Reformulate (loop)",
         "hard_q": [
-            "What are the current state duty fees for registering a business in Kazakhstan?",
+            "What are the penalties for late tax filing for SMEs in Kazakhstan?",
             "What are the sanitary requirements for opening a food service establishment in Kazakhstan?",
             "How do I check the status of my business registration application on egov.kz?",
             "How do I obtain an electronic digital signature (EDS) for business use in Kazakhstan?",
