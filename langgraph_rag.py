@@ -46,7 +46,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from ragas.metrics.collections import Faithfulness, AnswerRelevancy
-from ragas.llms import llm_factory as ragas_llm_factory
+from ragas.llms import LangchainLLMWrapper
 from ragas.embeddings import OpenAIEmbeddings as RagasOAIEmbeddings
 import openai, asyncio
 
@@ -55,7 +55,7 @@ import openai, asyncio
 llm = ChatOpenAI(model="gpt-4.1-mini", temperature=0)
 
 _openai_async_client = openai.AsyncOpenAI()
-_ragas_llm = ragas_llm_factory("gpt-4o-mini", client=_openai_async_client)
+_ragas_llm = LangchainLLMWrapper(ChatOpenAI(model="gpt-4o-mini", temperature=0))
 _ragas_emb = RagasOAIEmbeddings(model="text-embedding-3-small", client=_openai_async_client)
 
 _faithfulness = Faithfulness(llm=_ragas_llm)
