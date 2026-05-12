@@ -1,0 +1,107 @@
+LEGAL RAG ASSISTANT — EVALUATION REPORT
+Date: 2026-05-12 12:01
+Model: gpt-4.1-mini | Questions: 8
+==========================================================================================
+
+ #  Scenario      Score  Faith  Relev  Source    M  Att   Time  Question
+------------------------------------------------------------------------------------------
+ 1  Local RAG      6.8    6.7    6.9  local     ✅    1  13.9s  How many days of annual vacation leave is an 
+ 2  Local RAG      8.7   10.0    7.3  local     ✅    1   8.6s  What are the legal grounds for terminating an
+ 3  Local RAG      7.7    6.7    8.7  mcp      ⚠️    1   8.2s  What are an employer's obligations regarding 
+ 4  Local RAG      4.9    0.0    9.8  mcp      ⚠️    1   8.1s  What is the statute of limitations under the 
+ 5  Local RAG      8.3    6.7   10.0  mcp      ⚠️    1   8.6s  What documents are required to register an LL
+ 6  Local RAG      5.4    2.5    8.3  mcp      ⚠️    1   5.8s  How do I register as a sole proprietor (IP) i
+ 7  MCP            1.2    2.5    0.0  mcp       ✅    1   7.7s  What is the minimum monthly wage amount in Ka
+ 8  MCP            8.1    8.0    8.2  mcp       ✅    1  11.6s  What are the current social tax rates for emp
+------------------------------------------------------------------------------------------
+AVG                 6.4    5.4    7.4
+
+Source match: 4/8 correct
+Total time:   72.5s
+Pass (>=7.0): 4/8 questions
+
+==========================================================================================
+ANSWERS DETAIL
+
+[1] How many days of annual vacation leave is an employee entitled to in Kazakhstan?
+Score: 6.8/10 | Faith: 6.7 | Relev: 6.9 | Source: local ✅
+В Казахстане основной оплачиваемый ежегодный трудовой отпуск составляет 24 календарных дня. Если иное не предусмотрено трудовым или коллективным договором, нормативными актами или актами работодателя, именно этот срок является минимальным. Дополнительные оплачиваемые отпуска могут предоставляться в соответствии с законодательством.
+
+---
+**Источники:**
+- 📄 [Локальная база] Трудовой кодекс РК, Статья 89, стр. 78
+
+------------------------------------------------------------
+
+[2] What are the legal grounds for terminating an employment contract in Kazakhstan?
+Score: 8.7/10 | Faith: 10.0 | Relev: 7.3 | Source: local ✅
+В Казахстане трудовой договор может быть прекращён по различным основаниям, включая нарушение условий заключения трудового договора, переход работника на выборную работу или назначение на должность, исключающую возможность продолжения трудовых отношений. Также расторжение возможно по соглашению сторон и на основании решения экзаменационной комиссии в определённых случаях. Основания и порядок расторжения регулируются Трудовым кодексом Республики Казахстан.
+
+---
+**Источники:**
+- 📄 [Локальная база] Трудовой кодекс РК, Статья 60, стр. 61
+- 📄 [Локальная база] Трудовой кодекс РК, Статья 50, стр. 50
+
+------------------------------------------------------------
+
+[3] What are an employer's obligations regarding overtime pay in Kazakhstan?
+Score: 7.7/10 | Faith: 6.7 | Relev: 8.7 | Source: mcp ⚠️
+В соответствии с Трудовым кодексом Республики Казахстан, работодатель обязан оплачивать работу в сверхурочное время не менее чем в полуторном размере от часовой ставки работника при почасовой оплате. При сдельной оплате труда надбавка за сверхурочную работу должна составлять не менее 50% от установленной тарифной ставки или оклада. Условия оплаты сверхурочной работы могут быть также определены трудовым или коллективным договором, но не могут быть ниже указанных минимальных норм.
+
+---
+**Источники:**
+- ⚖️ [MCP adilet.zan.kz] [Labour code of the Republic of Kazakhstan - "Adilet" LIS](https://adilet.zan.kz/eng/docs/K1500000414)
+- ⚖️ [MCP egov.kz] [Payment at deviation from norms of work. Extra charges, surcharges and ...](https://egov.kz/cms/en/articles/employment_relations/oplata_pri_otklonenii_ot_norm_truda)
+
+------------------------------------------------------------
+
+[4] What is the statute of limitations under the Civil Code of Kazakhstan?
+Score: 4.9/10 | Faith: 0.0 | Relev: 9.8 | Source: mcp ⚠️
+Срок исковой давности по Гражданскому кодексу Республики Казахстан составляет три года и начинает течь с момента, когда истец узнал или должен был узнать о нарушении своего права. Этот срок применяется к большинству гражданско-правовых требований, если иное не установлено законом. В отдельных случаях законодательство может предусматривать специальные сроки исковой давности.
+
+---
+**Источники:**
+- ⚖️ [MCP adilet.zan.kz] [Civil Code of the Republic of Kazakhstan - "Adilet" LIS](https://adilet.zan.kz/eng/docs/K940001000_)
+- ⚖️ [MCP vestnik.zqai.kz] [SPECIFIC ISSUES OF STATUTE OF LIMITATIONS ACCORDING TO THE LEGISLATION OF THE REPUBLIC OF KAZAKHSTAN | Scientific and legal journal «Bulletin of the Institute of Legislation and Legal Information of the Republic of Kazakhstan»](https://vestnik.zqai.kz/index.php/vestnik/article/view/1647)
+
+------------------------------------------------------------
+
+[5] What documents are required to register an LLP in Kazakhstan?
+Score: 8.3/10 | Faith: 6.7 | Relev: 10.0 | Source: mcp ⚠️
+Для регистрации ТОО (LLP) в Казахстане необходимо подготовить решение об учреждении, утвердить устав (можно использовать типовую форму или разработать индивидуально), а также получить электронную цифровую подпись (ЭЦП). Иностранным гражданам дополнительно требуется предоставить копию паспорта с нотариально заверенным переводом и оформить бизнес-иммигрантскую визу C5 или временное разрешение на проживание для бизнес-иммигрантов из ЕАЭС. Также подается заявление и квитанция об оплате регистрационного взноса.
+
+---
+**Источники:**
+- ⚖️ [MCP testbcc.amphibia.kz] [How to Open an LLP in Kazakhstan in 2024: Documents and Online...](https://testbcc.amphibia.kz/en/bcc-journal/how-to-open-too/)
+- ⚖️ [MCP prg.kz] [Top 10 Questions to a Lawyer on business registration in Kazakhstan...](https://prg.kz/Document/?doc_id=37019437)
+
+------------------------------------------------------------
+
+[6] How do I register as a sole proprietor (IP) in Kazakhstan?
+Score: 5.4/10 | Faith: 2.5 | Relev: 8.3 | Source: mcp ⚠️
+Для регистрации в качестве индивидуального предпринимателя (ИП) в Казахстане необходимо подать заявление через портал электронного правительства egov.kz или обратиться в уполномоченный орган. Регистрация занимает обычно один рабочий день и требует предоставления удостоверения личности и ИИН. После регистрации ИП получает статус и может вести предпринимательскую деятельность, уплачивая соответствующие налоги и взносы.
+
+---
+**Источники:**
+- ⚖️ [MCP egov.kz] [Registration of legal entities/Business registration | Electronic government of the Republic of Kazakhstan](https://egov.kz/cms/en/services/business_registration/pass042com_mu)
+- ⚖️ [MCP www.bcc.kz] [How to Open an Individual Entrepreneur in Kazakhstan in 2026: Registration, Taxes, and Tips for Entrepreneurs](https://www.bcc.kz/en/bcc-journal/how-to-open-ip/)
+
+------------------------------------------------------------
+
+[7] What is the minimum monthly wage amount in Kazakhstan as of January 2026?
+Score: 1.2/10 | Faith: 2.5 | Relev: 0.0 | Source: mcp ✅
+Информация о минимальной месячной заработной плате в Казахстане на январь 2026 года в доступных источниках, включая законодательные документы и официальный портал adilet.zan.kz, отсутствует. Рекомендуется обратиться к официальным правительственным публикациям или Министерству труда и социальной защиты населения РК для получения актуальных данных.
+
+------------------------------------------------------------
+
+[8] What are the current social tax rates for employers in Kazakhstan in 2026?
+Score: 8.1/10 | Faith: 8.0 | Relev: 8.2 | Source: mcp ✅
+В 2026 году работодатели в Казахстане обязаны уплачивать социальные взносы, включающие обязательные пенсионные взносы (10%) и взносы на обязательное социальное медицинское страхование (2%). Кроме того, с заработной платы работников удерживается индивидуальный подоходный налог в размере 10%. Общая ставка социальных налогов для работодателей составляет около 12% от фонда оплаты труда.
+
+---
+**Источники:**
+- ⚖️ [MCP www.bcc.kz] [Social Contributions in Kazakhstan in 2026: What are They, How to ...](https://www.bcc.kz/en/bcc-journal/social-payments/)
+- ⚖️ [MCP bpo.kz] [Overview of changes in the legislation of the Republic of Kazakhstan on ...](https://bpo.kz/en/news/obzor-izmenenij-zakonodatelstva-rk-fot-2026)
+
+------------------------------------------------------------
+

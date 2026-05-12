@@ -1,0 +1,158 @@
+LEGAL RAG ASSISTANT — EVALUATION REPORT
+Date: 2026-05-12 12:31
+Model: gpt-4.1-mini | Questions: 12
+==========================================================================================
+
+ #  Scenario      Score  Faith  Relev  Source    M  Att   Time  Question
+------------------------------------------------------------------------------------------
+ 1  Local RAG      4.9    0.0    9.8  mcp      ⚠️    1  16.3s  What is the statute of limitations under the 
+ 2  Local RAG      8.6   10.0    7.1  local     ✅    1   7.4s  What is the employer's liability for delayed 
+ 3  Local RAG      8.4   10.0    6.7  local     ✅    1  17.5s  How many vacation days are employees entitled
+ 4  Local RAG      5.6    1.7    9.6  mcp      ⚠️    1  11.4s  What are the grounds for terminating an emplo
+ 5  Local RAG      7.4   10.0    4.9  local     ✅    1  11.4s  What are the grounds for declaring a transact
+ 6  MCP            7.0    5.0    9.0  mcp       ✅    1  11.7s  What are the penalties for late tax filing fo
+ 7  MCP            9.0   10.0    8.1  mcp       ✅    1  11.4s  What are the sanitary requirements for openin
+ 8  MCP            9.3   10.0    8.6  mcp       ✅    1  13.2s  How do I check the status of my business regi
+ 9  MCP            8.2    7.5    9.0  mcp       ✅    1  12.4s  How do I obtain an electronic digital signatu
+10  MCP            9.0    8.3    9.8  mcp       ✅    1  11.6s  What are the requirements for opening a pharm
+11  Edge Case      4.4    6.7    2.1  local    ⚠️    3  74.1s  If a customer slips and falls in my shop, am 
+12  Edge Case      6.2    6.7    5.8  local     ✅    3  77.2s  If I want to close my business temporarily fo
+------------------------------------------------------------------------------------------
+AVG                 7.3    7.2    7.5
+
+Source match: 9/12 correct
+Total time:   275.6s
+Pass (>=7.0): 8/12 questions
+
+==========================================================================================
+ANSWERS DETAIL
+
+[1] What is the statute of limitations under the Civil Code of Kazakhstan?
+Score: 4.9/10 | Faith: 0.0 | Relev: 9.8 | Source: mcp ⚠️
+Срок исковой давности по Гражданскому кодексу Республики Казахстан составляет три года и начинает течь с момента, когда лицо узнало или должно было узнать о нарушении своего права. Этот срок применяется к большинству гражданско-правовых требований, если иное не установлено законом. В отдельных случаях законодательство может предусматривать специальные сроки исковой давности.
+
+---
+**Источники:**
+- ⚖️ [MCP adilet.zan.kz] [Civil Code of the Republic of Kazakhstan - "Adilet" LIS](https://adilet.zan.kz/eng/docs/K940001000_)
+- ⚖️ [MCP vestnik.zqai.kz] [SPECIFIC ISSUES OF STATUTE OF LIMITATIONS ACCORDING TO THE LEGISLATION OF THE REPUBLIC OF KAZAKHSTAN | Scientific and legal journal «Bulletin of the Institute of Legislation and Legal Information of the Republic of Kazakhstan»](https://vestnik.zqai.kz/index.php/vestnik/article/view/1647)
+
+------------------------------------------------------------
+
+[2] What is the employer's liability for delayed salary payment under the Labor Code of Kazakhstan?
+Score: 8.6/10 | Faith: 10.0 | Relev: 7.1 | Source: local ✅
+Согласно Трудовому кодексу Республики Казахстан, при задержке выплаты заработной платы работодатель обязан выплатить работнику задолженность и пеню. Размер пени рассчитывается исходя из 1,25-кратной базовой ставки Национального Банка РК на день исполнения обязательств и начисляется за каждый просроченный календарный день, начиная со следующего дня после установленного срока выплаты и до дня фактической выплаты. Кроме того, работодатель несет ответственность в соответствии с законами РК за невыплату заработной платы в полном объеме и в установленные сроки.
+
+---
+**Источники:**
+- 📄 [Локальная база] Трудовой кодекс РК, стр. 92
+
+------------------------------------------------------------
+
+[3] How many vacation days are employees entitled to in Kazakhstan?
+Score: 8.4/10 | Faith: 10.0 | Relev: 6.7 | Source: local ✅
+В Казахстане основной оплачиваемый ежегодный трудовой отпуск предоставляется продолжительностью 24 календарных дня, если иное не предусмотрено трудовым или коллективным договором, нормативными правовыми актами или актами работодателя. Дополнительные оплачиваемые отпуска могут предоставляться в соответствии с Трудовым кодексом и другими нормативными актами.
+
+---
+**Источники:**
+- 📄 [Локальная база] Трудовой кодекс РК, Статья 89, стр. 78
+- ⚖️ [MCP egov.kz] [Rest timе | Electronic government of the Republic of Kazakhstan](https://egov.kz/cms/en/articles/vremya_otdiha)
+- ⚖️ [MCP www.bcc.kz] [Calculation of Vacation Pay in Kazakhstan 2026: Types, Norms, and ...](https://www.bcc.kz/en/bcc-journal/vacation-pay-calculation/)
+
+------------------------------------------------------------
+
+[4] What are the grounds for terminating an employment contract at the employer's initiative under the Labor Code of Kazakhstan?
+Score: 5.6/10 | Faith: 1.7 | Relev: 9.6 | Source: mcp ⚠️
+Основаниями для прекращения трудового договора по инициативе работодателя в соответствии с Трудовым кодексом Республики Казахстан являются, в частности, ликвидация организации, сокращение численности или штата работников, неоднократное неисполнение работником трудовых обязанностей без уважительных причин, а также другие случаи, предусмотренные законом. Работодатель обязан соблюдать установленный порядок и основания для увольнения, включая уведомление работника и предоставление компенсаций, если это предусмотрено законодательством.
+
+---
+**Источники:**
+- ⚖️ [MCP zakonpravo.kz] [Article 49. Grounds for termination of the employment ...](https://zakonpravo.kz/en/article-49-grounds-for-termination-of-the-employment-contract-of-the-labor-code-of-the-republic-of-kazakhstan)
+
+------------------------------------------------------------
+
+[5] What are the grounds for declaring a transaction void under the Civil Code of Kazakhstan?
+Score: 7.4/10 | Faith: 10.0 | Relev: 4.9 | Source: local ✅
+Сделка может быть признана недействительной, если её содержание не соответствует требованиям законодательства, либо если она совершена с целью, заведомо противоречащей основам правопорядка. Также сделка, направленная на достижение преступной цели, является основанием для её признания недействительной. Кроме того, сделка, совершённая юридическим лицом с нарушением уставной компетенции или в противоречии с целями деятельности, может быть признана недействительной по иску собственника имущества или иного уполномоченного лица.
+
+---
+**Источники:**
+- 📄 [Локальная база] Гражданский кодекс РК (общая часть), стр. 98
+- 📄 [Локальная база] Гражданский кодекс РК (общая часть), Статья 9, стр. 100
+
+------------------------------------------------------------
+
+[6] What are the penalties for late tax filing for SMEs in Kazakhstan?
+Score: 7.0/10 | Faith: 5.0 | Relev: 9.0 | Source: mcp ✅
+Для малого и среднего бизнеса в Казахстане предусмотрены штрафы за несвоевременную подачу налоговой отчетности согласно Налоговому кодексу РК. Однако с 2026 года для микропредприятий и малого бизнеса планируется снижение налоговых проверок и освобождение от административной ответственности за позднюю регистрацию по НДС и несвоевременную подачу отчетов при условии полного погашения задолженностей до 1 апреля 2026 года. Также предусмотрена амнистия по некоторым налоговым нарушениям, совершенным до 1 января 2026 года.
+
+---
+**Источники:**
+- ⚖️ [MCP adilet.zan.kz] [On the enactment of the Code of the Republic of Kazakhstan "On Taxes ...](https://adilet.zan.kz/eng/docs/Z1700000121)
+- ⚖️ [MCP zakonpravo.kz] [Article 85. Penalties of the Tax Code of the Republic of Kazakhstan](https://zakonpravo.kz/en/article-85-penalties-of-the-tax-code-of-the-republic-of-kazakhstan)
+
+------------------------------------------------------------
+
+[7] What are the sanitary requirements for opening a food service establishment in Kazakhstan?
+Score: 9.0/10 | Faith: 10.0 | Relev: 8.1 | Source: mcp ✅
+Для открытия предприятия общественного питания в Казахстане необходимо соблюдать санитарно-эпидемиологические требования, включая прохождение предварительного медицинского осмотра работников, обучение и сертификацию по санитарии. Также требуется организация санитарно-противоэпидемических мероприятий и соблюдение гигиенических норм, установленных законодательством и техническими регламентами. Все эти требования направлены на обеспечение санитарной безопасности и предотвращение распространения инфекционных заболеваний.
+
+---
+**Источники:**
+- ⚖️ [MCP adilet.zan.kz] [On approval of the Rules of Catering in the National... - "Adilet" LIS](https://adilet.zan.kz/eng/docs/V1700015796)
+- ⚖️ [MCP zakon.uchet.kz] [On approval of the rules for development and approval of documents of ...](https://zakon.uchet.kz/eng/docs/V2000021854)
+
+------------------------------------------------------------
+
+[8] How do I check the status of my business registration application on egov.kz?
+Score: 9.3/10 | Faith: 10.0 | Relev: 8.6 | Source: mcp ✅
+Для проверки статуса заявки на регистрацию бизнеса на портале egov.kz необходимо войти в личный кабинет и перейти в раздел «Мои заявки». Там отображается текущий статус поданных заявлений, а также можно получить информацию о полученных разрешениях и уведомлениях. Такой способ позволяет оперативно отслеживать процесс регистрации индивидуального предпринимателя или юридического лица.
+
+---
+**Источники:**
+- ⚖️ [MCP egov.kz] [Registration of legal entities/Business registration - egov.kz](https://egov.kz/cms/en/services/business_registration/pass042com_mu)
+- ⚖️ [MCP egov.kz] [Electronic government of the Republic of Kazakhstan - egov.kz](https://egov.kz/cms/en)
+
+------------------------------------------------------------
+
+[9] How do I obtain an electronic digital signature (EDS) for business use in Kazakhstan?
+Score: 8.2/10 | Faith: 7.5 | Relev: 9.0 | Source: mcp ✅
+Для получения электронной цифровой подписи (ЭЦП) для бизнеса в Казахстане необходимо иметь действующий национальный удостоверяющий документ с фотографией, зарегистрированный в Государственной базе данных Министерства юстиции РК. С 11 августа 2025 года ЭЦП можно получить только онлайн через портал электронного правительства egov.kz или сайт Национального удостоверяющего центра pki.gov.kz. Процесс включает подачу заявки и прохождение идентификации удаленно без необходимости посещения центра обслуживания.
+
+---
+**Источники:**
+- ⚖️ [MCP egov.kz] [Getting a digital signature remotely | Electronic government of the ...](https://egov.kz/cms/en/services/pass_onlineecp)
+- ⚖️ [MCP www.gov.kz] [Receive EDS remotely - gov](https://www.gov.kz/services/4362?lang=en)
+
+------------------------------------------------------------
+
+[10] What are the requirements for opening a pharmacy in Kazakhstan?
+Score: 9.0/10 | Faith: 8.3 | Relev: 9.8 | Source: mcp ✅
+Для открытия аптеки в Казахстане необходимо получить лицензию на фармацевтическую деятельность через портал e-License, что занимает не более 15 рабочих дней. Также требуется соблюдение санитарно-эпидемиологических норм, оснащение помещения необходимым медицинским оборудованием, а также системами безопасности и пожарной сигнализации. Контроль и надзор осуществляет Комитет медицинского и фармацевтического контроля Министерства здравоохранения РК.
+
+---
+**Источники:**
+- ⚖️ [MCP egov.kz] [Licensing of pharmaceutical activities available on the e-License ...](https://egov.kz/cms/en/news/Licensing_pharmaceutical)
+- ⚖️ [MCP adilet.zan.kz] [On Approval of the Rules for Conducting Pharmaceutical Inspections on ...](https://adilet.zan.kz/eng/docs/V2100022143)
+
+------------------------------------------------------------
+
+[11] If a customer slips and falls in my shop, am I liable?
+Score: 4.4/10 | Faith: 6.7 | Relev: 2.1 | Source: local ⚠️
+Согласно статье 127 Предпринимательского кодекса РК, субъект предпринимательства обязан возместить имущественный вред, причиненный жизни, здоровью физических лиц или имуществу третьих лиц. Если клиент поскользнулся и упал в вашем магазине, вы можете нести гражданско-правовую ответственность за причиненный вред. Для защиты от таких рисков предусмотрено обязательное страхование гражданско-правовой ответственности субъектов предпринимательства.
+
+---
+**Источники:**
+- 📄 [Локальная база] Предпринимательский кодекс РК, Статья 127, стр. 130
+
+------------------------------------------------------------
+
+[12] If I want to close my business temporarily for vacation, do I need to notify authorities?
+Score: 6.2/10 | Faith: 6.7 | Relev: 5.8 | Source: local ✅
+Если вы хотите временно приостановить деятельность бизнеса, необходимо подать налоговое заявление о приостановлении представления налоговой отчетности или расчета стоимости патента. Это письменное согласие служит уведомлением налоговым органам о временном прекращении деятельности. Таким образом, уведомление властей обязательно для законного приостановления бизнеса.
+
+---
+**Источники:**
+- 📄 [Локальная база] Налоговый кодекс РК, стр. 90
+
+------------------------------------------------------------
+
