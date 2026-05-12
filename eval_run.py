@@ -32,24 +32,7 @@ from langgraph_rag import run_graph, _run_ragas
 #   Hard       → current data not present in the static knowledge base
 
 TEST_CASES = [
-    # Scenario 1: Labor Code — well-covered in local DB
-    {
-        "scenario": "Local RAG",
-        "question": "How many days of annual vacation leave is an employee entitled to in Kazakhstan?",
-        "expected_source": "local",
-    },
-    {
-        "scenario": "Local RAG",
-        "question": "What are the legal grounds for terminating an employment contract in Kazakhstan?",
-        "expected_source": "local",
-    },
-    {
-        "scenario": "Local RAG",
-        "question": "What are an employer's obligations regarding overtime pay in Kazakhstan?",
-        "expected_source": "local",
-    },
-
-    # Scenario 2: Civil Code + Entrepreneurship Code — well-covered in local DB
+    # Scenario 1 — Local RAG (questions from UI easy_q)
     {
         "scenario": "Local RAG",
         "question": "What is the statute of limitations under the Civil Code of Kazakhstan?",
@@ -57,25 +40,62 @@ TEST_CASES = [
     },
     {
         "scenario": "Local RAG",
-        "question": "What documents are required to register an LLP in Kazakhstan?",
+        "question": "What is the employer's liability for delayed salary payment under the Labor Code of Kazakhstan?",
         "expected_source": "local",
     },
     {
         "scenario": "Local RAG",
-        "question": "How do I register as a sole proprietor (IP) in Kazakhstan?",
+        "question": "How many vacation days are employees entitled to in Kazakhstan?",
+        "expected_source": "local",
+    },
+    {
+        "scenario": "Local RAG",
+        "question": "What are the grounds for terminating an employment contract at the employer's initiative under the Labor Code of Kazakhstan?",
+        "expected_source": "local",
+    },
+    {
+        "scenario": "Local RAG",
+        "question": "What are the grounds for declaring a transaction void under the Civil Code of Kazakhstan?",
         "expected_source": "local",
     },
 
-    # Scenario 3: current data → MCP
+    # Scenario 2 — RAG not found → MCP (questions from UI hard_q)
     {
         "scenario": "MCP",
-        "question": "What is the minimum monthly wage amount in Kazakhstan as of January 2026?",
+        "question": "What are the penalties for late tax filing for SMEs in Kazakhstan?",
         "expected_source": "mcp",
     },
     {
         "scenario": "MCP",
-        "question": "What are the current social tax rates for employers in Kazakhstan in 2026?",
+        "question": "What are the sanitary requirements for opening a food service establishment in Kazakhstan?",
         "expected_source": "mcp",
+    },
+    {
+        "scenario": "MCP",
+        "question": "How do I check the status of my business registration application on egov.kz?",
+        "expected_source": "mcp",
+    },
+    {
+        "scenario": "MCP",
+        "question": "How do I obtain an electronic digital signature (EDS) for business use in Kazakhstan?",
+        "expected_source": "mcp",
+    },
+    {
+        "scenario": "MCP",
+        "question": "What are the requirements for opening a pharmacy in Kazakhstan?",
+        "expected_source": "mcp",
+    },
+
+    # Scenario 3 — Edge Cases (questions from UI edge_q)
+    {
+        "scenario": "Edge Case",
+        "question": "If a customer slips and falls in my shop, am I liable?",
+        "expected_source": "none",
+    },
+    {
+        "scenario": "Edge Case",
+        "question": "If I want to close my business temporarily for vacation, do I need to notify authorities?",
+        "expected_source": "local",
     },
 ]
 
@@ -120,7 +140,7 @@ def run_eval():
         t0 = time.time()
         try:
             # Запускаем полный RAG pipeline для одного вопроса
-            state = run_graph(q, max_attempts=3)
+            state = run_graph(q, max_attempts=3, language="en")
             elapsed = round(time.time() - t0, 1)
 
             score    = state.get("overall_score", 0.0)

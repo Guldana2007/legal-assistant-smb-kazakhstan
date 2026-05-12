@@ -1,0 +1,147 @@
+LEGAL RAG ASSISTANT — EVALUATION REPORT
+Date: 2026-05-12 12:41
+Model: gpt-4.1-mini | Questions: 12
+==========================================================================================
+
+ #  Scenario      Score  Faith  Relev  Source    M  Att   Time  Question
+------------------------------------------------------------------------------------------
+ 1  Local RAG      9.9   10.0    9.8  local     ✅    1  17.2s  What is the statute of limitations under the 
+ 2  Local RAG      9.5   10.0    9.1  local     ✅    1   8.2s  What is the employer's liability for delayed 
+ 3  Local RAG      9.5   10.0    9.1  local     ✅    1  13.8s  How many vacation days are employees entitled
+ 4  Local RAG      9.8   10.0    9.7  local     ✅    1  14.0s  What are the grounds for terminating an emplo
+ 5  Local RAG      9.8   10.0    9.5  local     ✅    1   8.3s  What are the grounds for declaring a transact
+ 6  MCP            8.1    6.2   10.0  mcp       ✅    1  17.8s  What are the penalties for late tax filing fo
+ 7  MCP            8.3    7.5    9.1  mcp       ✅    1  14.2s  What are the sanitary requirements for openin
+ 8  MCP            8.7    7.5   10.0  mcp       ✅    1  13.0s  How do I check the status of my business regi
+ 9  MCP            9.6   10.0    9.2  mcp       ✅    1  11.3s  How do I obtain an electronic digital signatu
+10  MCP            8.3    6.7   10.0  local    ⚠️    1  12.4s  What are the requirements for opening a pharm
+11  Edge Case      2.7    0.0    5.4  mcp      ⚠️    3  77.9s  If a customer slips and falls in my shop, am 
+12  Edge Case      3.7    0.0    7.5  mcp      ⚠️    3  64.3s  If I want to close my business temporarily fo
+------------------------------------------------------------------------------------------
+AVG                 8.2    7.3    9.0
+
+Source match: 9/12 correct
+Total time:   272.4s
+Pass (>=7.0): 10/12 questions
+
+==========================================================================================
+ANSWERS DETAIL
+
+[1] What is the statute of limitations under the Civil Code of Kazakhstan?
+Score: 9.9/10 | Faith: 10.0 | Relev: 9.8 | Source: local ✅
+Under the Civil Code of Kazakhstan, the general statute of limitations is three years. This period applies to the time frame within which a claim can be satisfied arising from a violation of a person's rights or legally protected interests. However, for certain types of claims, legislative acts may establish special limitation periods that can be shorter or longer than the general three-year term.
+
+---
+**Sources:**
+- 📄 [Local DB] Гражданский кодекс РК (общая часть), Article 178, p. 107
+
+------------------------------------------------------------
+
+[2] What is the employer's liability for delayed salary payment under the Labor Code of Kazakhstan?
+Score: 9.5/10 | Faith: 10.0 | Relev: 9.1 | Source: local ✅
+Under the Labor Code of Kazakhstan, if an employer delays salary payment, they are liable to pay the employee the owed salary along with a penalty. The penalty is calculated based on 1.25 times the base rate of the National Bank of Kazakhstan on the day the payment obligation is due and accrues for each calendar day of delay, starting from the day after the payment was supposed to be made until the actual payment day.
+
+---
+**Sources:**
+- 📄 [Local DB] Трудовой кодекс РК, p. 92
+
+------------------------------------------------------------
+
+[3] How many vacation days are employees entitled to in Kazakhstan?
+Score: 9.5/10 | Faith: 10.0 | Relev: 9.1 | Source: local ✅
+In Kazakhstan, employees are entitled to a basic paid annual labor vacation of twenty-four calendar days. This duration can be extended if provided by the Labor Code, other normative legal acts of the Republic of Kazakhstan, labor or collective agreements, or employer's acts.
+
+---
+**Sources:**
+- 📄 [Local DB] Трудовой кодекс РК, Article 89, p. 78
+
+------------------------------------------------------------
+
+[4] What are the grounds for terminating an employment contract at the employer's initiative under the Labor Code of Kazakhstan?
+Score: 9.8/10 | Faith: 10.0 | Relev: 9.7 | Source: local ✅
+Under the Labor Code of Kazakhstan, an employer may terminate an employment contract on their initiative in cases such as the liquidation of the employer as a legal entity or the cessation of activities by an individual employer, as well as due to staff reduction or downsizing. These are explicitly stated grounds for termination by the employer.
+
+---
+**Sources:**
+- 📄 [Local DB] Трудовой кодекс РК, Article 52, p. 51
+
+------------------------------------------------------------
+
+[5] What are the grounds for declaring a transaction void under the Civil Code of Kazakhstan?
+Score: 9.8/10 | Faith: 10.0 | Relev: 9.5 | Source: local ✅
+Under the Civil Code of Kazakhstan, a transaction can be declared void if its content does not comply with the requirements of the legislation of the Republic of Kazakhstan. Interested parties, including the state, have the right to demand the recognition of such a transaction as invalid. The court, considering specific circumstances, may limit its decision to prohibiting further execution of the transaction.
+
+---
+**Sources:**
+- 📄 [Local DB] Гражданский кодекс РК (общая часть), Article 158, p. 98
+
+------------------------------------------------------------
+
+[6] What are the penalties for late tax filing for SMEs in Kazakhstan?
+Score: 8.1/10 | Faith: 6.2 | Relev: 10.0 | Source: mcp ✅
+In Kazakhstan, penalties for late tax filing for SMEs are generally imposed according to the Tax Code, which stipulates fines regardless of other enforcement measures. However, from 2026, micro and small businesses will benefit from reduced tax audits and exemptions from administrative liability for certain violations, including late VAT registration and failure to submit reports. Additionally, administrative penalties for some tax violations committed before January 1, 2026, such as late filing of VAT registration applications, will not be applied. Full payment of outstanding penalties by April 1, 2026, may also lead to relief from accrued fines.
+
+---
+**Sources:**
+- ⚖️ [MCP adilet.zan.kz] [On the enactment of the Code of the Republic of Kazakhstan "On Taxes ...](https://adilet.zan.kz/eng/docs/Z1700000121)
+- ⚖️ [MCP zakonpravo.kz] [Article 85. Penalties of the Tax Code of the Republic of Kazakhstan](https://zakonpravo.kz/en/article-85-penalties-of-the-tax-code-of-the-republic-of-kazakhstan)
+
+------------------------------------------------------------
+
+[7] What are the sanitary requirements for opening a food service establishment in Kazakhstan?
+Score: 8.3/10 | Faith: 7.5 | Relev: 9.1 | Source: mcp ✅
+In Kazakhstan, opening a food service establishment requires compliance with sanitary and epidemiological standards established by the Ministry of Healthcare. This includes passing a pre-employment medical examination, sanitation training, and certification for staff. The establishment must adhere to uniform sanitary-epidemiological and hygienic requirements, conduct sanitary and anti-epidemic measures, and ensure sanitary protection of the territory. Compliance with these rules is mandatory before commencing operations.
+
+---
+**Sources:**
+- ⚖️ [MCP adilet.zan.kz] [On approval of the Rules of Catering in the National... - "Adilet" LIS](https://adilet.zan.kz/eng/docs/V1700015796)
+- ⚖️ [MCP zakon.uchet.kz] [On approval of the rules for development and approval of documents of ...](https://zakon.uchet.kz/eng/docs/V2000021854)
+
+------------------------------------------------------------
+
+[8] How do I check the status of my business registration application on egov.kz?
+Score: 8.7/10 | Faith: 7.5 | Relev: 10.0 | Source: mcp ✅
+To check the status of your business registration application on egov.kz, you need to log in to your Personal Account on the portal. In the "My applications" section, you can track the status of your submitted application. Additionally, you can find information about approvals in the "My approved documents" section. This allows you to monitor the progress of your business registration online conveniently.
+
+---
+**Sources:**
+- ⚖️ [MCP egov.kz] [Электронное правительство Республики Казахстан](https://egov.kz/cms/ru)
+- ⚖️ [MCP egov.kz] [Registration of legal entities/Business registration - egov.kz](https://egov.kz/cms/en/services/business_registration/pass042com_mu)
+
+------------------------------------------------------------
+
+[9] How do I obtain an electronic digital signature (EDS) for business use in Kazakhstan?
+Score: 9.6/10 | Faith: 10.0 | Relev: 9.2 | Source: mcp ✅
+To obtain an electronic digital signature (EDS) for business use in Kazakhstan, you need a valid national ID or passport registered in the State Database of the Ministry of Justice. Starting August 11, 2025, EDS can only be obtained online through the e-government portal egov.kz or the National Certification Authority website pki.gov.kz. You will also need a mobile device capable of receiving SMS and a computer with a webcam to install the NCALayer software required for EDS installation and use.
+
+---
+**Sources:**
+- ⚖️ [MCP egov.kz] [Getting a digital signature remotely | Electronic government ...](https://egov.kz/cms/en/services/pass_onlineecp)
+- ⚖️ [MCP www.gov.kz] [Receive EDS remotely - gov](https://www.gov.kz/services/4362?lang=en)
+
+------------------------------------------------------------
+
+[10] What are the requirements for opening a pharmacy in Kazakhstan?
+Score: 8.3/10 | Faith: 6.7 | Relev: 10.0 | Source: local ⚠️
+To open a pharmacy in Kazakhstan, an individual or legal entity must obtain a pharmaceutical license through the e-License portal, with the process taking up to 15 working days. The pharmacy must comply with sanitary and epidemiological standards and be equipped with necessary medical equipment, as well as security and fire alarm systems. Additionally, the operation is subject to state control and supervision by the Committee for Medical and Pharmaceutical Control under the Ministry of Health. Compliance with good pharmaceutical practices and relevant regulations is also required.
+
+---
+**Sources:**
+- 📄 [Local DB] Гражданский кодекс РК (общая часть), p. 13
+- ⚖️ [MCP egov.kz] [Licensing of pharmaceutical activities available on the e-License ...](https://egov.kz/cms/en/news/Licensing_pharmaceutical)
+- ⚖️ [MCP adilet.zan.kz] [On Approval of the Rules for Conducting Pharmaceutical Inspections on ...](https://adilet.zan.kz/eng/docs/V2100022143)
+
+------------------------------------------------------------
+
+[11] If a customer slips and falls in my shop, am I liable?
+Score: 2.7/10 | Faith: 0.0 | Relev: 5.4 | Source: mcp ⚠️
+Under Kazakhstan law, a shop owner has a duty to ensure the safety of their premises for customers. If a customer slips and falls due to the shop owner's negligence in maintaining safe conditions, the owner may be held liable for damages. Liability typically depends on whether the owner took reasonable measures to prevent hazards and whether the injury resulted from a breach of this duty.
+
+------------------------------------------------------------
+
+[12] If I want to close my business temporarily for vacation, do I need to notify authorities?
+Score: 3.7/10 | Faith: 0.0 | Relev: 7.5 | Source: mcp ⚠️
+In Kazakhstan, there is no specific legal requirement to notify authorities if you temporarily close your business for vacation. However, it is advisable to check any sector-specific regulations or contractual obligations that might require notification. Generally, temporary suspension of business activities does not require formal notification unless stipulated by special licensing or regulatory rules.
+
+------------------------------------------------------------
+

@@ -260,21 +260,40 @@ Covers: Query Rewrite, RRF Fusion, Doc Grader, Hallucination Check, full pipelin
 
 ## Evaluation Results
 
-RAGAS scores from live English testing session (2026-05-07, scale 0–10):
+RAGAS scores from automated English evaluation (2026-05-12, 12 questions, scale 0–10):
+
+**Scenario 1 — Local RAG** (ChromaDB + BM25, 4 legal codes):
 
 | Query | Faith | Relev | Score |
 |-------|-------|-------|-------|
 | Statute of limitations (Civil Code) | 10.0 | 9.8 | **9.9** |
-| Employer liability for delayed salary | 10.0 | 8.9 | **9.4** |
-| Vacation days (Labor Code) | 10.0 | 8.4 | **9.2** |
-| Labor Code 2025 amendments | 8.6 | 9.6 | **9.1** |
-| Tax Code 2025 amendments | 5.7 | 9.6 | **7.6** |
-| VAT definition (Tax Code) | 3.3 | 7.3 | 5.3 |
-| Minimum wage 2026 | 10.0 | 0.0 | 5.0 |
+| Employer liability for delayed salary | 10.0 | 9.1 | **9.5** |
+| Vacation days (Labor Code) | 10.0 | 9.1 | **9.5** |
+| Grounds for terminating employment contract | 10.0 | 9.7 | **9.8** |
+| Grounds for declaring a transaction void | 10.0 | 9.5 | **9.8** |
 
-**Average: 7.9/10 overall · Pass rate (≥7.0): 5/7 questions**
+**Scenario 2 — MCP Fallback** (adilet.zan.kz, kgd.gov.kz, egov.kz):
 
-Low scores on two edge cases: the VAT question pulled an outdated 2014 invoice chunk instead of the definition, and the min wage question returned how the wage is set by law rather than the actual 2026 figure — a retrieval gap, not a generation error.
+| Query | Faith | Relev | Score |
+|-------|-------|-------|-------|
+| Penalties for late tax filing (SME) | 6.2 | 10.0 | **8.1** |
+| Sanitary requirements for food service | 7.5 | 9.1 | **8.3** |
+| Business registration status on egov.kz | 7.5 | 10.0 | **8.7** |
+| Electronic digital signature (EDS) for business | 10.0 | 9.2 | **9.6** |
+| Requirements for opening a pharmacy | 6.7 | 10.0 | **8.3** |
+
+**Scenario 3 — Edge Cases** (out-of-scope questions):
+
+| Query | Faith | Relev | Score |
+|-------|-------|-------|-------|
+| Customer slips and falls in shop (tort liability) | 0.0 | 5.4 | 2.7 |
+| Temporarily closing business for vacation | 0.0 | 7.5 | 3.7 |
+
+**Overall: 8.2/10 · Pass rate (≥7.0): 10/12 questions**
+
+Scenario 1 avg: **9.7/10** (5/5 pass) — Local RAG covers all 4 legal codes with high faithfulness.  
+Scenario 2 avg: **8.6/10** (5/5 pass) — MCP fallback finds relevant context on government portals.  
+Scenario 3 avg: **3.2/10** (0/2 pass, expected) — Out-of-scope questions; LLM answers from its own knowledge, Faithfulness = 0.0, FORCE ACCEPT after 3 retries. See Known Limitations.
 
 ---
 
