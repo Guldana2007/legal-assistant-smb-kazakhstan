@@ -65,7 +65,7 @@ The system answers legal questions about Kazakhstan legislation by combining loc
 | Vector DB | ChromaDB (~17K chunks, 4 legal codes) |
 | Embeddings | OpenAI text-embedding-3-small |
 | LLM (agents) | GPT-4.1-mini |
-| LLM (evaluation) | GPT-4o-mini (RAGAS judge) |
+| LLM (evaluation) | GPT-4o-mini (RAGAS judge, temperature=0) |
 | Lexical search | BM25Okapi (rank-bm25) |
 | Evaluation | RAGAS (Faithfulness + AnswerRelevancy, ~$0.001/eval) |
 | Observability | LangFuse (full pipeline trace, token costs) |
