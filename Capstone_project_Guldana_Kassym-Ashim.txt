@@ -25,7 +25,7 @@ Responsible for producing the final answer. Uses the following tools:
 
 Agent 3 — Orchestrating Agent ★
 The autonomous decision-maker of the system:
-- Reflect — runs RAGAS evaluation (Faithfulness + Answer Relevancy, gpt-4o-mini judge, temperature=0 for stable and consistent scores) and independently decides: accept the answer / retry retrieval / retry generation / stop (up to N attempts)
+- Reflect — runs RAGAS evaluation (Faithfulness + Answer Relevancy, gpt-4o-mini judge, temperature=0 for stable and consistent scores) and independently decides: accept the answer / retry retrieval / retry generation / stop (up to 3 attempts by default, configurable 1–5 via UI)
 - Tool: Reformulate — rewrites the query with a new expansion strategy when retry_retrieval is triggered
 
 ---
